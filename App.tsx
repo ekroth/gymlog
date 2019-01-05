@@ -1,10 +1,13 @@
 import React from 'react';
-import { SetChooserComponent } from './src/components/set-chooser';
+import { SetHandlerComponent } from './src/components/set-handler';
+import { Provider } from 'unstated';
 
 export default class App extends React.Component {
   render() {
     return (
-      <SetChooserComponent />
+      <Provider>
+      <SetHandlerComponent />
+      </Provider>
     );
   }
 }

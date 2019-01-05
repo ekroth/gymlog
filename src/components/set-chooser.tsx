@@ -1,25 +1,36 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { Provider, Subscribe } from 'unstated';
-import { SetChooserContainer } from '../containers/set-chooser';
-import { ValueChooser } from '../components/value-chooser';
+import { Text, View, Button } from 'react-native';
+import { Subscribe } from 'unstated';
+import { SetChooserContainer, SetChooserState } from '../containers/set-chooser';
+import NumericInput from 'react-native-numeric-input';
 
-export class SetChooserComponent extends React.Component {
-  render() {
-    return (
-      <Provider>
-        <Subscribe to={[SetChooserContainer]}>
-          {(container: SetChooserContainer) => (
-            <View style={{ padding: 100 }}>
-              <Text>{container.state.weight} kg and {container.state.reps} reps</Text>
-              <Text>Weight (kgs)</Text>
-              <ValueChooser type='real' step={2.5} value={container.state.weight} onChange={container.setWeight} />
-              <Text>Reps</Text>
-              <ValueChooser type='integer' step={1} value={container.state.reps} onChange={container.setReps} />
-            </View>
-          )}
-        </Subscribe>
-      </Provider>
-    );
-  }
+export interface SetChooserProps {
+    onSet: () => void;
 }
+
+export const SetChooserComponent = (props: SetChooserProps) => (
+    <Subscribe to={[SetChooserContainer]}>
+        {(container: SetChooserContainer) => (
+            <View style={{ padding: 100 }}>
+                <Text>{container.state.weight} kg and {container.state.reps} reps</Text>
+                <Text>Weight (kgs)</Text>
+                <NumericInput
+                    valueType='real'
+                    initValue={container.state.weight}
+                    onChange={container.setWeight}
+                    minValue={0}
+                    step={2.5}
+                />
+                <Text>Reps</Text>
+                <NumericInput
+                    valueType='integer'
+                    initValue={container.state.reps}
+                    onChange={container.setReps}
+                    minValue={0}
+                    step={1}
+                />
+                <Button title='Add' onPress={props.onSet} />
+            </View>
+        )}
+    </Subscribe>
+);
