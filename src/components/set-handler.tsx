@@ -1,23 +1,32 @@
 import React from 'react';
 import { FlatList, View, Text } from 'react-native';
-import { Subscribe } from 'unstated';
-import { SetHandlerContainer, Set } from '../containers/set-handler';
 import { SetChooserComponent } from '../components/set-chooser';
-import { SetChooserContainer } from '../containers/set-chooser';
+import Set from '../model/set';
 
-export const SetHandlerComponent = () => (
-    <Subscribe to={[SetHandlerContainer, SetChooserContainer]}>
-        {(handler: SetHandlerContainer, chooser: SetChooserContainer) => (
-            <View style={{}}>
-                <SetChooserComponent
-                    onSet={() => { handler.addSet(chooser.state.weight, chooser.state.reps) }} />
-                <FlatList<Set>
-                    data={handler.state.sets}
-                    keyExtractor={(_, index) => `${index}`}
-                    renderItem={({ item, index }) =>
-                        (<Text>{index + 1} - {item.weight} kgs and {item.reps} reps</Text>)}
-                />
-            </View>
-        )}
-    </Subscribe>
+export interface SetHandlerProps {
+    onAddCurrent: () => void;
+    onModifyCurrent: (set: Set) => void;
+
+    current: Set;
+    sets: Set[];
+}
+
+export const SetHandlerComponent = (props: SetHandlerProps) => (
+    <View style={{}}>
+        <SetChooserComponent
+            onSetReps={(reps) =>
+                props.onModifyCurrent({ weight: props.current.weight, reps: reps })}
+            onSetWeight={(weight) =>
+                props.onModifyCurrent({ weight: weight, reps: props.current.reps })}
+            onSave={props.onAddCurrent}
+            initWeight={props.current.weight}
+            initReps={props.current.reps}
+        />
+        <FlatList<Set>
+            data={props.sets}
+            keyExtractor={(_, index) => `${index}`}
+            renderItem={({ item, index }) =>
+                (<Text>{index + 1} - {item.weight} kgs and {item.reps} reps</Text>)}
+        />
+    </View>
 );
