@@ -1,5 +1,5 @@
 import { Container } from 'unstated';
-import Set from '../model/set';
+import Set from '../model/Set';
 
 export interface AppState {
   current: Set;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text } from 'react-native';
-import { SetChooserComponent } from '../components/set-chooser';
-import Set from '../model/set';
+import { SetChooserComponent } from './SetChooser';
+import Set from '../model/Set';
 
 export interface SetHandlerProps {
     onAddCurrent: () => void;

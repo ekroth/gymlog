@@ -1,7 +1,7 @@
 import React from 'react';
-import { SetHandlerComponent } from './src/components/set-handler';
+import { SetHandlerComponent } from './src/components/SetHandler';
 import { Provider, Subscribe } from 'unstated';
-import { AppContainer } from './src/containers/app-state';
+import { AppContainer } from './src/containers/App';
 
 export default class App extends React.Component {
   render() {
