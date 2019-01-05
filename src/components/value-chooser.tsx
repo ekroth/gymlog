@@ -4,18 +4,24 @@ import { Subscribe } from 'unstated';
 import NumericInput from 'react-native-numeric-input';
 import ValueChooserContainer from '../containers/value-chooser';
 
-class ValueChooser extends React.Component {
+interface ValueChooserProps {
+  // TODO: validate that step is an integer if type is 'integer'
+  type: 'integer' | 'real';
+  step: number;
+}
+
+class ValueChooser extends React.Component<ValueChooserProps> {
   render() {
     return (
       <Subscribe to={[ValueChooserContainer]}>
         {(chooser: ValueChooserContainer) => (
-          <View style={{ padding: 100 }}>
+          <View>
             <NumericInput
-              valueType={'real'}
+              valueType={this.props.type}
               initValue={chooser.state.value}
               onChange={(value: number) => chooser.setValue(value)}
               minValue={0}
-              step={chooser.state.step}
+              step={this.props.step}
             />
           </View>
         )}

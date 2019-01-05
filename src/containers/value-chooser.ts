@@ -1,22 +1,16 @@
 import { Container } from 'unstated';
 
-interface ValueChooserState {
+export interface ValueChooserState {
   value: number
-  step: number
 }
 
-class ValueChooserContainer extends Container<ValueChooserState> {
+export class ValueChooserContainer extends Container<ValueChooserState> {
   state = {
-    value: 0,
-    step: 2.5
+    value: 0
   };
 
   setValue = (v: number) => {
     this.setState({ value: v });
-  }
-
-  setStep = (d: number) => {
-    this.setState({ step: d });
   }
 }
 
