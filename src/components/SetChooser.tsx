@@ -12,23 +12,23 @@ export interface SetChooserProps {
 }
 
 export const SetChooserComponent = (props: SetChooserProps) => (
-    <View style={{ padding: 100 }}>
-    <Text>Weight (kgs)</Text>
-    <NumericInput
-        valueType='real'
-        initValue={props.initWeight}
-        onChange={props.onSetWeight}
-        minValue={0}
-        step={2.5}
-    />
-    <Text>Reps</Text>
-    <NumericInput
-        valueType='integer'
-        initValue={props.initReps}
-        onChange={props.onSetReps}
-        minValue={0}
-        step={1}
-    />
-    <Button title='Save' onPress={props.onSave} />
-</View>
+    <View style={{}}>
+        <Text>Weight (kgs)</Text>
+        <NumericInput
+            valueType='real'
+            initValue={props.initWeight}
+            onChange={props.onSetWeight}
+            minValue={0}
+            step={2.5}
+        />
+        <Text>Reps</Text>
+        <NumericInput
+            valueType='integer'
+            initValue={props.initReps}
+            onChange={props.onSetReps}
+            minValue={0}
+            step={1}
+        />
+        <Button title='Add' onPress={props.onSave} />
+    </View>
 );
