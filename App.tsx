@@ -1,7 +1,7 @@
-import React from 'react';
-import { SetHandlerComponent } from './src/components/SetHandler';
-import { Provider, Subscribe } from 'unstated';
-import { AppContainer } from './src/containers/App';
+import { PureComponent } from 'react'
+import { Provider, Subscribe } from 'unstated'
+import { SetHandlerComponent } from './src/components/SetHandler'
+import { AppContainer } from './src/containers/App'
 
 const testState = new AppContainer({
   current: { weight: 150, reps: 1 },
@@ -10,10 +10,10 @@ const testState = new AppContainer({
     { weight: 150, reps: 1 },
     { weight: 172.5, reps: 0 }
   ]
-});
+})
 
-export default class App extends React.PureComponent {
-  render() {
+export default class App extends PureComponent {
+  public render() {
     return (
       <Provider inject={[testState]}>
         <Subscribe to={[AppContainer]}>
@@ -27,6 +27,6 @@ export default class App extends React.PureComponent {
           )}
         </Subscribe>
       </Provider>
-    );
+    )
   }
 }

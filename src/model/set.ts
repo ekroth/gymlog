@@ -1,4 +1,4 @@
 export default interface Set {
-    weight: number;
-    reps: number;
+  weight: number
+  reps: number
 }
