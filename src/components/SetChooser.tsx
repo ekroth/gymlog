@@ -15,7 +15,7 @@ export const SetChooserComponent = (props: SetChooserProps) => (
   <View style={{}}>
     <Text>Weight (kgs)</Text>
     <NumericInput
-      valueType="real"
+      valueType={'real'}
       initValue={props.initWeight}
       onChange={props.onSetWeight}
       minValue={0}
@@ -23,12 +23,12 @@ export const SetChooserComponent = (props: SetChooserProps) => (
     />
     <Text>Reps</Text>
     <NumericInput
-      valueType="integer"
+      valueType={'integer'}
       initValue={props.initReps}
       onChange={props.onSetReps}
       minValue={0}
       step={1}
     />
-    <Button title="Add" onPress={props.onSave} />
+    <Button title={'Add'} onPress={props.onSave} />
   </View>
 )

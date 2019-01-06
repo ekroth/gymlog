@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
 import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
