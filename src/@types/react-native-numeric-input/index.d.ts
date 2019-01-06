@@ -1,5 +1,5 @@
 declare module 'react-native-numeric-input' {
-    import React from 'react';
+    import { Component } from 'react';
 
     // see: https://www.npmjs.com/package/react-native-numeric-input
     interface NumericInputProps {
@@ -32,6 +32,10 @@ declare module 'react-native-numeric-input' {
         reachMinDecIconStyle?: object;
     }
 
-    const NumericInput: React.SFC<NumericInputProps>
+    interface NumericInputState {
+
+    }
+
+    const NumericInput: Component<NumericInputProps, NumericInputState>
     export default NumericInput
 }
