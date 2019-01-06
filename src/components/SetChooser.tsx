@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 
-export interface SetChooserProps {
+type SetChooserProps = {
     onSetWeight: (weight: number) => void;
     onSetReps: (weight: number) => void;
     onSave: () => void;

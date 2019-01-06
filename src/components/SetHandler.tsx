@@ -3,7 +3,7 @@ import { FlatList, View, Text } from 'react-native';
 import { SetChooserComponent } from './SetChooser';
 import Set from '../model/Set';
 
-export interface SetHandlerProps {
+type SetHandlerProps = {
     onAddCurrent: () => void;
     onModifyCurrent: (set: Set) => void;
 
@@ -11,7 +11,7 @@ export interface SetHandlerProps {
     sets: Set[];
 }
 
-interface SetItemProps {
+type SetItemProps = {
     index: number;
     set: Set;
 }

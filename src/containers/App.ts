@@ -1,12 +1,12 @@
 import { Container } from 'unstated';
 import Set from '../model/Set';
 
-export interface AppState {
+type AppState = {
   current: Set;
   sets: Set[];
 }
 
-export interface AppProps {
+type AppProps = {
   current: Set;
   sets: Set[];
 }
