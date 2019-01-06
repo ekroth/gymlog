@@ -12,8 +12,7 @@ const testState = new AppContainer({
   ]
 });
 
-export default class App extends React.Component {
-
+export default class App extends React.PureComponent {
   render() {
     return (
       <Provider inject={[testState]}>
