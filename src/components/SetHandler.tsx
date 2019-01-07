@@ -1,6 +1,7 @@
 import React from 'react'
-import { FlatList, Text, View } from 'react-native'
+import { FlatList } from 'react-native'
 import Set from '../model/Set'
+import { ListItem, View, Text, Grid, Subtitle, Col } from 'native-base'
 import { SetChooserComponent } from './SetChooser'
 
 type SetHandlerProps = {
@@ -17,45 +18,33 @@ type SetItemProps = {
 }
 
 const SetItemComponent = ({ index, set }: SetItemProps) => (
-  <View
-    style={{
-      alignItems: 'stretch',
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center'
-    }}
-  >
-    <Text style={{ flex: 1, flexDirection: 'row', fontSize: 30 }}>
-      {index + 1}
-    </Text>
-    <View style={{ flex: 1, flexDirection: 'row' }}>
-      <Text style={{ fontSize: 25 }}>{set.weight}</Text>
-      <Text
-        style={{
-          alignSelf: 'center',
-          color: '#A9A9A9',
-          fontSize: 10,
-          marginLeft: 5
-        }}
-      >
-        kgs
-      </Text>
-    </View>
-    <View style={{ flex: 1, flexDirection: 'row' }}>
-      <Text style={{ fontSize: 25 }}>{set.reps}</Text>
-      <Text
-        style={{
-          alignSelf: 'center',
-          color: '#A9A9A9',
-          fontSize: 10,
-
-          marginLeft: 5
-        }}
-      >
-        reps
-      </Text>
-    </View>
-  </View>
+  <ListItem itemDivider={false}>
+    <Grid>
+      <Col size={20}>
+        <Text style={{ fontWeight: 'bold' }}>{index}</Text>
+      </Col>
+      <Col size={60}>
+        <Grid>
+          <Col>
+            <Text style={{ alignSelf: 'flex-end', fontWeight: 'bold' }}>
+              {set.weight}
+            </Text>
+          </Col>
+          <Col>
+            <Subtitle style={{ alignSelf: 'flex-start' }}>kgs</Subtitle>
+          </Col>
+        </Grid>
+      </Col>
+      <Col size={10}>
+        <Text style={{ alignSelf: 'flex-end', fontWeight: 'bold' }}>
+          {set.reps}
+        </Text>
+      </Col>
+      <Col size={10}>
+        <Subtitle style={{ alignSelf: 'flex-start' }}>reps</Subtitle>
+      </Col>
+    </Grid>
+  </ListItem>
 )
 
 export const SetHandlerComponent = (props: SetHandlerProps) => (
