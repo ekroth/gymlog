@@ -15,6 +15,7 @@
     "import-name": false,
     "variable-name": false,
     "interface-name": false,
+    "ordered-imports": false,
     "jsx-no-lambda": false
   }
 }
