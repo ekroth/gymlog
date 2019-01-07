@@ -4,7 +4,7 @@ import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
 
 const testState = new AppContainer({
-  current: { weight: 150, reps: 1 },
+  current: { weight: 172.5, reps: 0 },
   sets: [
     { weight: 120, reps: 50 },
     { weight: 150, reps: 1 },
