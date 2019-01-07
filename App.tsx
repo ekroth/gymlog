@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
+import { Container, Content } from 'native-base'
 import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
 
@@ -18,12 +19,16 @@ export default class App extends PureComponent {
       <Provider inject={[testState]}>
         <Subscribe to={[AppContainer]}>
           {(container: AppContainer) => (
-            <SetHandlerComponent
-              onAddCurrent={container.addCurrent}
-              onModifyCurrent={container.modifyCurrent}
-              current={container.state.current}
-              sets={container.state.sets}
-            />
+            <Container>
+              <Content>
+                <SetHandlerComponent
+                  onAddCurrent={container.addCurrent}
+                  onModifyCurrent={container.modifyCurrent}
+                  current={container.state.current}
+                  sets={container.state.sets}
+                />
+              </Content>
+            </Container>
           )}
         </Subscribe>
       </Provider>
