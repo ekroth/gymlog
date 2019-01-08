@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
-import { Container, Content } from 'native-base'
+import { Container, Content, Grid, Header, Text, Left } from 'native-base'
 import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
 
@@ -9,7 +9,7 @@ const testState = new AppContainer({
   sets: [
     { weight: 120, reps: 50 },
     { weight: 150, reps: 1 },
-    { weight: 172.5, reps: 0 }
+    { weight: 177.5, reps: 0 }
   ]
 })
 
@@ -20,14 +20,15 @@ export default class App extends PureComponent {
         <Subscribe to={[AppContainer]}>
           {(container: AppContainer) => (
             <Container>
-              <Content>
-                <SetHandlerComponent
-                  onAddCurrent={container.addCurrent}
-                  onModifyCurrent={container.modifyCurrent}
-                  current={container.state.current}
-                  sets={container.state.sets}
-                />
-              </Content>
+              <Header>
+                <Text style={{ alignSelf: 'center' }}>Add Sets</Text>
+              </Header>
+              <SetHandlerComponent
+                onAddCurrent={container.addCurrent}
+                onModifyCurrent={container.modifyCurrent}
+                current={container.state.current}
+                sets={container.state.sets}
+              />
             </Container>
           )}
         </Subscribe>

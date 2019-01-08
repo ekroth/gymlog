@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import Set from '../model/Set'
-import { ListItem, View, Text, Grid, Subtitle, Col } from 'native-base'
+import { ListItem, Text, Grid, Subtitle, Col, Row } from 'native-base'
 import { SetChooserComponent } from './SetChooser'
 
 type SetHandlerProps = {
@@ -18,7 +18,7 @@ type SetItemProps = {
 }
 
 const SetItemComponent = ({ index, set }: SetItemProps) => (
-  <ListItem itemDivider={false}>
+  <ListItem>
     <Grid>
       <Col size={20}>
         <Text style={{ fontWeight: 'bold' }}>{index}</Text>
@@ -48,31 +48,28 @@ const SetItemComponent = ({ index, set }: SetItemProps) => (
 )
 
 export const SetHandlerComponent = (props: SetHandlerProps) => (
-  <View
-    style={{
-      alignItems: 'stretch',
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center'
-    }}
-  >
-    <SetChooserComponent
-      onSetReps={reps =>
-        props.onModifyCurrent({ reps, weight: props.current.weight })
-      }
-      onSetWeight={weight =>
-        props.onModifyCurrent({ weight, reps: props.current.reps })
-      }
-      onSave={props.onAddCurrent}
-      initWeight={props.current.weight}
-      initReps={props.current.reps}
-    />
-    <FlatList<Set>
-      data={props.sets}
-      keyExtractor={(_, index) => `${index}`}
-      renderItem={({ item, index }) => (
-        <SetItemComponent index={index} set={item} />
-      )}
-    />
-  </View>
+  <Grid>
+    <Row size={40}>
+      <SetChooserComponent
+        onSetReps={reps =>
+          props.onModifyCurrent({ reps, weight: props.current.weight })
+        }
+        onSetWeight={weight =>
+          props.onModifyCurrent({ weight, reps: props.current.reps })
+        }
+        onSave={props.onAddCurrent}
+        initWeight={props.current.weight}
+        initReps={props.current.reps}
+      />
+    </Row>
+    <Row size={60} style={{ backgroundColor: 'skyblue' }}>
+      <FlatList<Set>
+        data={props.sets}
+        keyExtractor={(_, index) => `${index}`}
+        renderItem={({ item, index }) => (
+          <SetItemComponent index={index} set={item} />
+        )}
+      />
+    </Row>
+  </Grid>
 )
