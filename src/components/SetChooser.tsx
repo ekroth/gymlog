@@ -5,7 +5,12 @@ import { NumberInput } from './NumberInput'
 type SetChooserProps = {
   onSetWeight: (weight: number) => void
   onSetReps: (weight: number) => void
-  onSave: () => void
+
+  onLeftButtonPress: () => void
+  onRightButtonPress: () => void
+
+  leftButtonText: string
+  rightButtonText: string
 
   initWeight: number
   initReps: number
@@ -32,9 +37,22 @@ export const SetChooserComponent = (props: SetChooserProps) => (
       />
     </Row>
     <Row>
-      <Button onPress={props.onSave}>
-        <Text>Add</Text>
-      </Button>
+      <Col size={1}>
+        <Button
+          onPress={props.onLeftButtonPress}
+          style={{ alignSelf: 'center' }}
+        >
+          <Text>{props.leftButtonText}</Text>
+        </Button>
+      </Col>
+      <Col size={1}>
+        <Button
+          onPress={props.onRightButtonPress}
+          style={{ alignSelf: 'center' }}
+        >
+          <Text>{props.rightButtonText}</Text>
+        </Button>
+      </Col>
     </Row>
   </Grid>
 )

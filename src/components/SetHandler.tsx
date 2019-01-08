@@ -5,15 +5,18 @@ import { ListItem, Text, Grid, Subtitle, Col, Row } from 'native-base'
 import { SetChooserComponent } from './SetChooser'
 
 type SetItemProps = {
-  onPress: (index: number, set: Set) => void
+  onPress: () => void
   index: number
   set: Set
   selected: boolean
 }
 
 const SetItemComponent = ({ onPress, index, set, selected }: SetItemProps) => (
-  <ListItem onPress={() => onPress(index, set)}>
-    <Grid style={{ backgroundColor: selected ? 'skyblue' : 'white' }}>
+  <ListItem
+    onPress={onPress}
+    style={{ backgroundColor: selected === true ? 'skyblue' : 'white' }}
+  >
+    <Grid>
       <Col size={20}>
         <Text style={{ fontWeight: 'bold' }}>{index}</Text>
       </Col>
@@ -59,12 +62,20 @@ export class SetHandlerComponent extends PureComponent<
   SetHandlerProps,
   SetHandlerState
 > {
+  private onSelectItems: Array<() => void>
+
   constructor(props: SetHandlerProps) {
     super(props)
     this.state = {
       current: props.initSet || { weight: 0, reps: 0 },
       selected: undefined
     }
+    this.onSelectItems = props.sets.map((set, index) => () =>
+      this.setState({
+        current: set,
+        selected: index
+      })
+    )
   }
 
   public render() {
@@ -74,7 +85,14 @@ export class SetHandlerComponent extends PureComponent<
           <SetChooserComponent
             onSetReps={this.onSetReps}
             onSetWeight={this.onSetWeight}
-            onSave={this.onSaveSet}
+            onLeftButtonPress={this.onLeftButtonPress}
+            onRightButtonPress={this.onRightButtonPress}
+            leftButtonText={
+              this.state.selected === undefined ? 'Add' : 'Modify'
+            }
+            rightButtonText={
+              this.state.selected === undefined ? 'Clear' : 'Delete'
+            }
             initWeight={this.state.current.weight}
             initReps={this.state.current.reps}
           />
@@ -88,7 +106,7 @@ export class SetHandlerComponent extends PureComponent<
                 index={index}
                 set={item}
                 selected={this.state.selected === index}
-                onPress={this.onSelectItem}
+                onPress={this.onSelectItems[index]}
               />
             )}
           />
@@ -111,22 +129,30 @@ export class SetHandlerComponent extends PureComponent<
     }))
   }
 
-  private onSaveSet = () => {
+  private onLeftButtonPress = () => {
     if (this.state.selected === undefined) {
       this.props.onAddSet(this.state.current)
     } else {
-      this.props.onModifySet(this.state.selected, this.state.current)
       this.setState({
         current: this.state.current,
         selected: undefined
       })
+      this.props.onModifySet(this.state.selected, this.state.current)
     }
   }
 
-  private onSelectItem = (index: number, set: Set) => {
-    this.setState({
-      current: set,
-      selected: index
-    })
+  private onRightButtonPress = () => {
+    if (this.state.selected === undefined) {
+      this.setState({
+        current: { weight: 0, reps: 0 },
+        selected: undefined
+      })
+    } else {
+      this.setState({
+        current: this.state.current,
+        selected: undefined
+      })
+      this.props.onDeleteSet(this.state.selected)
+    }
   }
 }

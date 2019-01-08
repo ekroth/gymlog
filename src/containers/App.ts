@@ -26,10 +26,11 @@ export class AppContainer extends Container<AppState> {
 
   public modifySet = (index: number, set: Set) =>
     this.setState(state => ({
-      sets: Object.assign([...state.sets, { [index]: set }])
+      sets: state.sets.map((s, i) => (i === index ? set : s))
     }))
 
-  public deleteSet = (index: number) => {
-    return
-  }
+  public deleteSet = (index: number) =>
+    this.setState(state => ({
+      sets: state.sets.filter((_, i) => i !== index)
+    }))
 }
