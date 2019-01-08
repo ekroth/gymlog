@@ -5,7 +5,6 @@ import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
 
 const testState = new AppContainer({
-  current: { weight: 172.5, reps: 0 },
   sets: [
     { weight: 120, reps: 50 },
     { weight: 150, reps: 1 },
@@ -24,10 +23,11 @@ export default class App extends PureComponent {
                 <Text style={{ alignSelf: 'center' }}>Add Sets</Text>
               </Header>
               <SetHandlerComponent
-                onAddCurrent={container.addCurrent}
-                onModifyCurrent={container.modifyCurrent}
-                current={container.state.current}
+                onAddSet={container.addSet}
+                onModifySet={container.modifySet}
+                onDeleteSet={container.deleteSet}
                 sets={container.state.sets}
+                initSet={container.state.sets[container.state.sets.length - 1]}
               />
             </Container>
           )}

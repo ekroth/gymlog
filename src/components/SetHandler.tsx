@@ -1,25 +1,19 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { FlatList } from 'react-native'
 import Set from '../model/Set'
 import { ListItem, Text, Grid, Subtitle, Col, Row } from 'native-base'
 import { SetChooserComponent } from './SetChooser'
 
-type SetHandlerProps = {
-  onAddCurrent: () => void
-  onModifyCurrent: (set: Set) => void
-
-  current: Set
-  sets: Set[]
-}
-
 type SetItemProps = {
+  onPress: (index: number, set: Set) => void
   index: number
   set: Set
+  selected: boolean
 }
 
-const SetItemComponent = ({ index, set }: SetItemProps) => (
-  <ListItem>
-    <Grid>
+const SetItemComponent = ({ onPress, index, set, selected }: SetItemProps) => (
+  <ListItem onPress={() => onPress(index, set)}>
+    <Grid style={{ backgroundColor: selected ? 'skyblue' : 'white' }}>
       <Col size={20}>
         <Text style={{ fontWeight: 'bold' }}>{index}</Text>
       </Col>
@@ -47,29 +41,92 @@ const SetItemComponent = ({ index, set }: SetItemProps) => (
   </ListItem>
 )
 
-export const SetHandlerComponent = (props: SetHandlerProps) => (
-  <Grid>
-    <Row size={40}>
-      <SetChooserComponent
-        onSetReps={reps =>
-          props.onModifyCurrent({ reps, weight: props.current.weight })
-        }
-        onSetWeight={weight =>
-          props.onModifyCurrent({ weight, reps: props.current.reps })
-        }
-        onSave={props.onAddCurrent}
-        initWeight={props.current.weight}
-        initReps={props.current.reps}
-      />
-    </Row>
-    <Row size={60} style={{ backgroundColor: 'skyblue' }}>
-      <FlatList<Set>
-        data={props.sets}
-        keyExtractor={(_, index) => `${index}`}
-        renderItem={({ item, index }) => (
-          <SetItemComponent index={index} set={item} />
-        )}
-      />
-    </Row>
-  </Grid>
-)
+type SetHandlerProps = {
+  onAddSet: (set: Set) => void
+  onDeleteSet: (index: number) => void
+  onModifySet: (index: number, set: Set) => void
+
+  initSet?: Set
+  sets: Set[]
+}
+
+type SetHandlerState = {
+  current: Set
+  selected?: number
+}
+
+export class SetHandlerComponent extends PureComponent<
+  SetHandlerProps,
+  SetHandlerState
+> {
+  constructor(props: SetHandlerProps) {
+    super(props)
+    this.state = {
+      current: props.initSet || { weight: 0, reps: 0 },
+      selected: undefined
+    }
+  }
+
+  public render() {
+    return (
+      <Grid>
+        <Row size={40}>
+          <SetChooserComponent
+            onSetReps={this.onSetReps}
+            onSetWeight={this.onSetWeight}
+            onSave={this.onSaveSet}
+            initWeight={this.state.current.weight}
+            initReps={this.state.current.reps}
+          />
+        </Row>
+        <Row size={60}>
+          <FlatList<Set>
+            data={this.props.sets}
+            keyExtractor={(_, index) => `${index}`}
+            renderItem={({ item, index }) => (
+              <SetItemComponent
+                index={index}
+                set={item}
+                selected={this.state.selected === index}
+                onPress={this.onSelectItem}
+              />
+            )}
+          />
+        </Row>
+      </Grid>
+    )
+  }
+
+  private onSetReps = (reps: number) => {
+    this.setState(state => ({
+      current: { reps, weight: state.current.weight },
+      selected: state.selected
+    }))
+  }
+
+  private onSetWeight = (weight: number) => {
+    this.setState(state => ({
+      current: { weight, reps: this.state.current.reps },
+      selected: this.state.selected
+    }))
+  }
+
+  private onSaveSet = () => {
+    if (this.state.selected === undefined) {
+      this.props.onAddSet(this.state.current)
+    } else {
+      this.props.onModifySet(this.state.selected, this.state.current)
+      this.setState({
+        current: this.state.current,
+        selected: undefined
+      })
+    }
+  }
+
+  private onSelectItem = (index: number, set: Set) => {
+    this.setState({
+      current: set,
+      selected: index
+    })
+  }
+}
