@@ -56,6 +56,7 @@ export class SetHandlerComponent extends PureComponent<
             data={this.props.sets}
             keyExtractor={keyExtractorIndex}
             renderItem={this.createSetItemComponent}
+            extraData={this.state}
           />
         </Row>
       </Grid>
