@@ -24,20 +24,12 @@ export class SetHandlerComponent extends PureComponent<
   SetHandlerProps,
   SetHandlerState
 > {
-  private onSelectItems: ReadonlyArray<() => void>
-
   constructor(props: SetHandlerProps) {
     super(props)
     this.state = {
       current: props.initSet || { weight: 0, reps: 0 },
       selected: undefined
     }
-    this.onSelectItems = props.sets.map((set, index) => () =>
-      this.setState({
-        current: set,
-        selected: index
-      })
-    )
   }
 
   public render() {
@@ -75,7 +67,12 @@ export class SetHandlerComponent extends PureComponent<
       index={info.index}
       set={info.item}
       selected={this.state.selected === info.index}
-      onPress={this.onSelectItems[info.index]}
+      onPress={() =>
+        this.setState({
+          current: info.item,
+          selected: info.index
+        })
+      }
     />
   )
 
@@ -88,7 +85,7 @@ export class SetHandlerComponent extends PureComponent<
 
   private onSetWeight = (weight: number) => {
     this.setState(state => ({
-      current: { weight, reps: this.state.current.reps },
+      current: { weight, reps: state.current.reps },
       selected: this.state.selected
     }))
   }
