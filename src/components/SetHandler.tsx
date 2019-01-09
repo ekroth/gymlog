@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, ListRenderItemInfo } from 'react-native'
 import Set from '../model/Set'
 import { ListItem, Text, Grid, Subtitle, Col, Row } from 'native-base'
 import { SetChooserComponent } from './SetChooser'
+import { keyExtractorIndex } from '../util/FlatListUtils'
 
 type SetItemProps = {
   onPress: () => void
@@ -14,7 +15,7 @@ type SetItemProps = {
 const SetItemComponent = ({ onPress, index, set, selected }: SetItemProps) => (
   <ListItem
     onPress={onPress}
-    style={{ backgroundColor: selected === true ? 'skyblue' : 'white' }}
+    style={{ backgroundColor: selected ? 'skyblue' : 'white' }}
   >
     <Grid>
       <Col size={20}>
@@ -50,7 +51,7 @@ type SetHandlerProps = {
   onModifySet: (index: number, set: Set) => void
 
   initSet?: Set
-  sets: Set[]
+  sets: ReadonlyArray<Set>
 }
 
 type SetHandlerState = {
@@ -62,7 +63,7 @@ export class SetHandlerComponent extends PureComponent<
   SetHandlerProps,
   SetHandlerState
 > {
-  private onSelectItems: Array<() => void>
+  private onSelectItems: ReadonlyArray<() => void>
 
   constructor(props: SetHandlerProps) {
     super(props)
@@ -100,20 +101,22 @@ export class SetHandlerComponent extends PureComponent<
         <Row size={60}>
           <FlatList<Set>
             data={this.props.sets}
-            keyExtractor={(_, index) => `${index}`}
-            renderItem={({ item, index }) => (
-              <SetItemComponent
-                index={index}
-                set={item}
-                selected={this.state.selected === index}
-                onPress={this.onSelectItems[index]}
-              />
-            )}
+            keyExtractor={keyExtractorIndex}
+            renderItem={this.createSetItemComponent}
           />
         </Row>
       </Grid>
     )
   }
+
+  private createSetItemComponent = (info: ListRenderItemInfo<Set>) => (
+    <SetItemComponent
+      index={info.index}
+      set={info.item}
+      selected={this.state.selected === info.index}
+      onPress={this.onSelectItems[info.index]}
+    />
+  )
 
   private onSetReps = (reps: number) => {
     this.setState(state => ({

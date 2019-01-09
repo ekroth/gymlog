@@ -2,11 +2,11 @@ import { Container } from 'unstated'
 import Set from '../model/Set'
 
 type AppState = {
-  sets: Set[]
+  sets: ReadonlyArray<Set>
 }
 
 type AppProps = {
-  sets: Set[]
+  sets: ReadonlyArray<Set>
 }
 
 export class AppContainer extends Container<AppState> {
