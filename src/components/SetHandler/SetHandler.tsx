@@ -1,49 +1,10 @@
 import React, { PureComponent } from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
-import Set from '../model/Set'
-import { ListItem, Text, Grid, Subtitle, Col, Row } from 'native-base'
-import { SetChooserComponent } from './SetChooser'
-import { keyExtractorIndex } from '../util/FlatListUtils'
-
-type SetItemProps = {
-  onPress: () => void
-  index: number
-  set: Set
-  selected: boolean
-}
-
-const SetItemComponent = ({ onPress, index, set, selected }: SetItemProps) => (
-  <ListItem
-    onPress={onPress}
-    style={{ backgroundColor: selected ? 'skyblue' : 'white' }}
-  >
-    <Grid>
-      <Col size={20}>
-        <Text style={{ fontWeight: 'bold' }}>{index}</Text>
-      </Col>
-      <Col size={60}>
-        <Grid>
-          <Col>
-            <Text style={{ alignSelf: 'flex-end', fontWeight: 'bold' }}>
-              {set.weight}
-            </Text>
-          </Col>
-          <Col>
-            <Subtitle style={{ alignSelf: 'flex-start' }}>kgs</Subtitle>
-          </Col>
-        </Grid>
-      </Col>
-      <Col size={10}>
-        <Text style={{ alignSelf: 'flex-end', fontWeight: 'bold' }}>
-          {set.reps}
-        </Text>
-      </Col>
-      <Col size={10}>
-        <Subtitle style={{ alignSelf: 'flex-start' }}>reps</Subtitle>
-      </Col>
-    </Grid>
-  </ListItem>
-)
+import Set from '../../model/Set'
+import { Grid, Row } from 'native-base'
+import { SetChooserComponent } from '../SetChooser'
+import { keyExtractorIndex } from '../../util/FlatListUtils'
+import { SetItemComponent } from './SetItemComponent'
 
 type SetHandlerProps = {
   onAddSet: (set: Set) => void

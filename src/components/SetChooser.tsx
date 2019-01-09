@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, Grid, Row, Left, Right, Col, Input } from 'native-base'
+import { Button, Text, Grid, Row, Col } from 'native-base'
 import { NumberInput } from './NumberInput'
 
 type SetChooserProps = {

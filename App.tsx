@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
-import { Container, Content, Grid, Header, Text, Left } from 'native-base'
+import { Container, Header, Text } from 'native-base'
 import { SetHandlerComponent } from './src/components/SetHandler'
 import { AppContainer } from './src/containers/App'
 
