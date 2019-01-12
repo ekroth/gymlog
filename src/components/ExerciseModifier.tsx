@@ -95,9 +95,9 @@ export class ExerciseModifierComponent extends PureComponent<
 
   private onLeftButtonPress = () => {
     if (this.state.selected === undefined) {
-      callback1(this.props.onAddSet, this.state.current)
+      callback1(this.props.onAddSet)(this.state.current)
     } else {
-      callback2(this.props.onModifySet, this.state.selected, this.state.current)
+      callback2(this.props.onModifySet)(this.state.selected, this.state.current)
       this.setState({
         current: this.state.current,
         selected: undefined
@@ -112,7 +112,7 @@ export class ExerciseModifierComponent extends PureComponent<
         selected: undefined
       })
     } else {
-      callback1(this.props.onDeleteSet, this.state.selected)
+      callback1(this.props.onDeleteSet)(this.state.selected)
       this.setState({
         current: this.state.current,
         selected: undefined

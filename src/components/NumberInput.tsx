@@ -16,8 +16,7 @@ export const NumberInputComponent = (props: NumberInputProps) => (
       <Button
         style={{ alignSelf: 'center', backgroundColor: 'grey' }}
         onPress={() =>
-          callback1(
-            props.onChange,
+          callback1(props.onChange)(
             Math.max(props.minValue, props.value - props.step)
           )
         }
@@ -43,9 +42,9 @@ export const NumberInputComponent = (props: NumberInputProps) => (
               : parseInt(event.nativeEvent.text, 10)
 
           if (!Number.isNaN(n)) {
-            callback1(props.onChange, n)
+            callback1(props.onChange)(n)
           } else {
-            callback1(props.onChange, props.value)
+            callback1(props.onChange)(props.value)
           }
         }}
       />
@@ -53,7 +52,7 @@ export const NumberInputComponent = (props: NumberInputProps) => (
     <Col style={{ minWidth: 20 }}>
       <Button
         style={{ alignSelf: 'center', backgroundColor: 'green' }}
-        onPress={() => callback1(props.onChange, props.value + props.step)}
+        onPress={() => callback1(props.onChange)(props.value + props.step)}
       >
         <Icon name={'add'} />
       </Button>
