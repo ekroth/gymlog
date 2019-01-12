@@ -5,17 +5,18 @@ import { Grid, Row } from 'native-base'
 import { SetChooserComponent } from '../SetChooser'
 import { keyExtractorIndex } from '../../util/FlatListUtils'
 import { SetItemComponent } from './SetItemComponent'
+import { callback1, callback2 } from '../../util/Callbacks'
 
-type SetHandlerProps = {
-  onAddSet: (set: Set) => void
-  onDeleteSet: (index: number) => void
-  onModifySet: (index: number, set: Set) => void
+export type SetHandlerProps = {
+  onAddSet?: (set: Set) => void
+  onDeleteSet?: (index: number) => void
+  onModifySet?: (index: number, set: Set) => void
 
   initSet?: Set
   sets: ReadonlyArray<Set>
 }
 
-type SetHandlerState = {
+export type SetHandlerState = {
   current: Set
   selected?: number
 }
@@ -25,7 +26,14 @@ export class SetHandlerComponent extends PureComponent<
   SetHandlerState
 > {
   constructor(props: SetHandlerProps) {
-    super(props)
+    super({
+      onAddSet:
+        props.onAddSet ||
+        ((_: Set) => {
+          return
+        }),
+      ...props
+    })
     this.state = {
       current: props.initSet || { weight: 0, reps: 0 },
       selected: undefined
@@ -93,13 +101,13 @@ export class SetHandlerComponent extends PureComponent<
 
   private onLeftButtonPress = () => {
     if (this.state.selected === undefined) {
-      this.props.onAddSet(this.state.current)
+      callback1(this.props.onAddSet, this.state.current)
     } else {
       this.setState({
         current: this.state.current,
         selected: undefined
       })
-      this.props.onModifySet(this.state.selected, this.state.current)
+      callback2(this.props.onModifySet, this.state.selected, this.state.current)
     }
   }
 
@@ -114,7 +122,7 @@ export class SetHandlerComponent extends PureComponent<
         current: this.state.current,
         selected: undefined
       })
-      this.props.onDeleteSet(this.state.selected)
+      callback1(this.props.onDeleteSet, this.state.selected)
     }
   }
 }

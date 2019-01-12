@@ -3,11 +3,11 @@ import { Button, Text, Grid, Row, Col } from 'native-base'
 import { NumberInput } from './NumberInput'
 
 type SetChooserProps = {
-  onSetWeight: (weight: number) => void
-  onSetReps: (weight: number) => void
+  onSetWeight?: (weight: number) => void
+  onSetReps?: (weight: number) => void
 
-  onLeftButtonPress: () => void
-  onRightButtonPress: () => void
+  onLeftButtonPress?: () => void
+  onRightButtonPress?: () => void
 
   leftButtonText: string
   rightButtonText: string

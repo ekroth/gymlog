@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button, Grid, Col, Input, Icon } from 'native-base'
+import { callback1 } from '../util/Callbacks'
 
 type NumberInputProps = {
-  onChange: (value: number) => void
+  onChange?: (value: number) => void
   value: number
   step: number
   minValue: number
@@ -15,7 +16,10 @@ export const NumberInput = (props: NumberInputProps) => (
       <Button
         style={{ alignSelf: 'center', backgroundColor: 'grey' }}
         onPress={() =>
-          props.onChange(Math.max(props.minValue, props.value - props.step))
+          callback1(
+            props.onChange,
+            Math.max(props.minValue, props.value - props.step)
+          )
         }
       >
         <Icon name={'remove'} />

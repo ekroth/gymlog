@@ -8,9 +8,6 @@ describe('SetItemComponent', () => {
     it('should match snapshot', () => {
       const props: SetItemProps = {
         index: 0,
-        onPress: () => {
-          return
-        },
         selected: false,
         set: { weight: 150, reps: 5 }
       }

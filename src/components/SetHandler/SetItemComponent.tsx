@@ -3,7 +3,7 @@ import Set from '../../model/Set'
 import { ListItem, Text, Grid, Subtitle, Col } from 'native-base'
 
 export type SetItemProps = {
-  onPress: () => void
+  onPress?: () => void
   index: number
   set: Set
   selected: boolean
