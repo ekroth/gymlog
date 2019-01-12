@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SetItemComponent rendering should render a <View /> 1`] = `
+exports[`SetItemComponent rendering should match snapshot 1`] = `
 <Styled(ListItem)
   onPress={[Function]}
   style={
