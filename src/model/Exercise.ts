@@ -2,8 +2,8 @@ import Set from './Set'
 import { arrayUpdate, arrayRemove } from '../util/ReadonlyArrayUtils'
 
 export default interface Exercise {
-  name: string
-  sets: ReadonlyArray<Set>
+  readonly name: string
+  readonly sets: ReadonlyArray<Set>
 }
 
 export const addSet = (exercise: Exercise, set: Set) => ({
