@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SetHandlerComponent rendering should match snapshot for multiple sets 1`] = `
+<GridNB>
+  <RowNB
+    size={40}
+  >
+    <Component
+      initReps={1}
+      initWeight={170}
+      leftButtonText="Add"
+      onLeftButtonPress={[Function]}
+      onRightButtonPress={[Function]}
+      onSetReps={[Function]}
+      onSetWeight={[Function]}
+      rightButtonText="Clear"
+    />
+  </RowNB>
+  <RowNB
+    size={60}
+  >
+    <FlatList
+      data={
+        Array [
+          Object {
+            "reps": 5,
+            "weight": 100,
+          },
+          Object {
+            "reps": 2,
+            "weight": 150,
+          },
+        ]
+      }
+      disableVirtualization={false}
+      extraData={
+        Object {
+          "current": Object {
+            "reps": 1,
+            "weight": 170,
+          },
+          "selected": undefined,
+        }
+      }
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </RowNB>
+</GridNB>
+`;
+
+exports[`SetHandlerComponent rendering should match snapshot for zero sets 1`] = `
+<GridNB>
+  <RowNB
+    size={40}
+  >
+    <Component
+      initReps={0}
+      initWeight={0}
+      leftButtonText="Add"
+      onLeftButtonPress={[Function]}
+      onRightButtonPress={[Function]}
+      onSetReps={[Function]}
+      onSetWeight={[Function]}
+      rightButtonText="Clear"
+    />
+  </RowNB>
+  <RowNB
+    size={60}
+  >
+    <FlatList
+      data={Array []}
+      disableVirtualization={false}
+      extraData={
+        Object {
+          "current": Object {
+            "reps": 0,
+            "weight": 0,
+          },
+          "selected": undefined,
+        }
+      }
+      horizontal={false}
+      initialNumToRender={10}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      numColumns={1}
+      onEndReachedThreshold={2}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    />
+  </RowNB>
+</GridNB>
+`;

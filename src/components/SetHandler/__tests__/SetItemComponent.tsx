@@ -16,9 +16,7 @@ describe('SetItemComponent', () => {
     })
 
     it('should invoke callback on press', () => {
-      const callback = jest.fn(() => {
-        return
-      })
+      const callback = jest.fn()
       const props: SetItemProps = {
         index: 0,
         onPress: callback,

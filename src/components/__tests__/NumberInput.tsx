@@ -21,9 +21,7 @@ describe('SetHandlerComponent', () => {
     })
 
     it('should call callback when receiving valid values otherwise old value', () => {
-      const callback = jest.fn(() => {
-        return
-      })
+      const callback = jest.fn()
 
       const event1 = {
         nativeEvent: {

@@ -14,6 +14,7 @@ export type SetHandlerProps = {
 
   initSet?: Set
   sets: ReadonlyArray<Set>
+  selected?: number
 }
 
 export type SetHandlerState = {
@@ -26,17 +27,10 @@ export class SetHandlerComponent extends PureComponent<
   SetHandlerState
 > {
   constructor(props: SetHandlerProps) {
-    super({
-      onAddSet:
-        props.onAddSet ||
-        ((_: Set) => {
-          return
-        }),
-      ...props
-    })
+    super(props)
     this.state = {
       current: props.initSet || { weight: 0, reps: 0 },
-      selected: undefined
+      selected: props.selected
     }
   }
 
@@ -118,11 +112,11 @@ export class SetHandlerComponent extends PureComponent<
         selected: undefined
       })
     } else {
+      callback1(this.props.onDeleteSet, this.state.selected)
       this.setState({
         current: this.state.current,
         selected: undefined
       })
-      callback1(this.props.onDeleteSet, this.state.selected)
     }
   }
 }
