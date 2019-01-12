@@ -16,11 +16,15 @@
     "unstated": "^2.1.1"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.11",
     "@types/react": "16.7.18",
     "@types/react-native": "0.57.25",
     "@types/react-test-renderer": "16.0.3",
     "babel-jest": "23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -32,8 +36,10 @@
     "eslint-plugin-typescript": "^0.14.0",
     "eslint-plugin-unicorn": "^6.0.1",
     "jest": "^23.6.0",
+    "jest-fetch-mock": "^2.1.0",
     "metro-react-native-babel-preset": "0.51.1",
     "prettier": "^1.15.3",
+    "react-dom": "^16.7.0",
     "react-test-renderer": "16.6.3",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",
@@ -44,6 +50,30 @@
     "typescript": "3.2.2"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.jest.json"
+      }
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
   }
 }
