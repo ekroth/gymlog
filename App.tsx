@@ -1,6 +1,48 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
 import { Container, Header, Text } from 'native-base'
+import { WorkoutModifierComponent } from './src/components/WorkoutModifier'
+import { WorkoutContainer } from './src/containers/Workout'
+
+const testState = new WorkoutContainer({
+  exercises: [
+    {
+      name: 'Squat',
+      sets: [
+        { weight: 120, reps: 50 },
+        { weight: 150, reps: 1 },
+        { weight: 177.5, reps: 0 }
+      ]
+    },
+    {
+      name: 'Deadlift',
+      sets: [{ weight: 200, reps: 1 }]
+    }
+  ]
+})
+
+export default class App extends PureComponent {
+  public render() {
+    return (
+      <Provider inject={[testState]}>
+        <Subscribe to={[WorkoutContainer]}>
+          {(container: WorkoutContainer) => (
+            <Container>
+              <Header>
+                <Text style={{ alignSelf: 'center' }}>Workouts</Text>
+              </Header>
+              <WorkoutModifierComponent exercises={container.state.exercises} />
+            </Container>
+          )}
+        </Subscribe>
+      </Provider>
+    )
+  }
+}
+
+/*import React, { PureComponent } from 'react'
+import { Provider, Subscribe } from 'unstated'
+import { Container, Header, Text } from 'native-base'
 import { ExerciseModifierComponent } from './src/components/ExerciseModifier'
 import { AppContainer } from './src/containers/App'
 
@@ -36,3 +78,4 @@ export default class App extends PureComponent {
     )
   }
 }
+*/
