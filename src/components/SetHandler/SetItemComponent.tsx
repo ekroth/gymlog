@@ -2,7 +2,7 @@ import React from 'react'
 import Set from '../../model/Set'
 import { ListItem, Text, Grid, Subtitle, Col } from 'native-base'
 
-type SetItemProps = {
+export type SetItemProps = {
   onPress: () => void
   index: number
   set: Set
