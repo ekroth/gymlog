@@ -85,7 +85,7 @@ describe('SetHandlerComponent', () => {
         .first()
         .props().onLeftButtonPress!()
 
-      expect(cb.mock.calls).toEqual([[props.selected]])
+      expect(cb.mock.calls).toEqual([[props.selected, props.initSet]])
     })
   })
 })

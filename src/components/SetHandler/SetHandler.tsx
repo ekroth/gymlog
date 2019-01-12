@@ -97,11 +97,11 @@ export class SetHandlerComponent extends PureComponent<
     if (this.state.selected === undefined) {
       callback1(this.props.onAddSet, this.state.current)
     } else {
+      callback2(this.props.onModifySet, this.state.selected, this.state.current)
       this.setState({
         current: this.state.current,
         selected: undefined
       })
-      callback2(this.props.onModifySet, this.state.selected, this.state.current)
     }
   }
 
