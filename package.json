@@ -76,6 +76,6 @@
     "modulePaths": [
       "<rootDir>"
     ],
-    "setupTestFrameworkScriptFile": "./tests/setup.js"
+    "setupTestFrameworkScriptFile": "./setup.enzyme.js"
   }
 }

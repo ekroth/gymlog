@@ -1,5 +1,3 @@
-// setup-tests.js
-
 import 'react-native'
 import 'jest-enzyme'
 import Adapter from 'enzyme-adapter-react-16'
