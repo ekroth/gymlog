@@ -1,5 +1,5 @@
 import React from 'react'
-import Set from '../../model/Set'
+import Set from '../model/Set'
 import { ListItem, Text, Grid, Subtitle, Col } from 'native-base'
 
 export type SetItemProps = {

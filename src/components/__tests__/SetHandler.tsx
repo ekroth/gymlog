@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { SetChooserComponent } from '../../SetChooser'
+import { SetChooserComponent } from '../SetChooser'
 import { SetHandlerComponent, SetHandlerProps } from '../SetHandler'
 
 describe('SetHandlerComponent', () => {

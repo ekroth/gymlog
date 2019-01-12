@@ -1,1 +1,0 @@
-export { SetHandlerComponent } from './SetHandler'

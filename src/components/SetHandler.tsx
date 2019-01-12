@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
-import Set from '../../model/Set'
+import Set from '../model/Set'
 import { Grid, Row } from 'native-base'
-import { SetChooserComponent } from '../SetChooser'
-import { keyExtractorIndex } from '../../util/FlatListUtils'
-import { SetItemComponent } from './SetItemComponent'
-import { callback1, callback2 } from '../../util/Callbacks'
+import { SetChooserComponent } from './SetChooser'
+import { keyExtractorIndex } from '../util/FlatListUtils'
+import { SetItemComponent } from './SetItem'
+import { callback1, callback2 } from '../util/Callbacks'
 
 export type SetHandlerProps = {
   onAddSet?: (set: Set) => void
