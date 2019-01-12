@@ -2,7 +2,6 @@
 
 exports[`SetItemComponent rendering should match snapshot 1`] = `
 <Styled(ListItem)
-  onPress={[Function]}
   style={
     Object {
       "backgroundColor": "white",

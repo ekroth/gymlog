@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Grid, Col, Input, Icon } from 'native-base'
 import { callback1 } from '../util/Callbacks'
 
-type NumberInputProps = {
+export type NumberInputProps = {
   onChange?: (value: number) => void
   value: number
   step: number
@@ -43,9 +43,9 @@ export const NumberInput = (props: NumberInputProps) => (
               : parseInt(event.nativeEvent.text, 10)
 
           if (!Number.isNaN(n)) {
-            props.onChange(n)
+            callback1(props.onChange, n)
           } else {
-            props.onChange(props.value)
+            callback1(props.onChange, props.value)
           }
         }}
       />
@@ -53,7 +53,7 @@ export const NumberInput = (props: NumberInputProps) => (
     <Col style={{ minWidth: 20 }}>
       <Button
         style={{ alignSelf: 'center', backgroundColor: 'green' }}
-        onPress={() => props.onChange(props.value + props.step)}
+        onPress={() => callback1(props.onChange, props.value + props.step)}
       >
         <Icon name={'add'} />
       </Button>

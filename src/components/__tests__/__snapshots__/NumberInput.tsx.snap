@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SetHandlerComponent rendering should match snapshot 1`] = `
+<GridNB
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <ColumnNB
+    style={
+      Object {
+        "minWidth": 20,
+      }
+    }
+  >
+    <Styled(Button)
+      onPress={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "grey",
+        }
+      }
+    >
+      <Styled(Icon)
+        name="remove"
+      />
+    </Styled(Button)>
+  </ColumnNB>
+  <ColumnNB
+    size={4}
+  >
+    <Styled(Input)
+      defaultValue="100"
+      keyboardType="decimal-pad"
+      onSubmitEditing={[Function]}
+      returnKeyType="done"
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "fontSize": 40,
+          "textAlign": "center",
+          "textAlignVertical": "center",
+        }
+      }
+    />
+  </ColumnNB>
+  <ColumnNB
+    style={
+      Object {
+        "minWidth": 20,
+      }
+    }
+  >
+    <Styled(Button)
+      onPress={[Function]}
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "green",
+        }
+      }
+    >
+      <Styled(Icon)
+        name="add"
+      />
+    </Styled(Button)>
+  </ColumnNB>
+</GridNB>
+`;
