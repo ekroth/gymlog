@@ -1,19 +1,22 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { SetChooserComponent } from '../SetChooser'
-import { SetHandlerComponent, SetHandlerProps } from '../SetHandler'
+import { SetModifierComponent } from '../SetModifier'
+import {
+  ExerciseModifierComponent,
+  ExerciseModifierProps
+} from '../ExerciseModifier'
 
-describe('SetHandlerComponent', () => {
+describe('ExerciseModifier', () => {
   describe('rendering', () => {
     it('should match snapshot for zero sets', () => {
-      const props: SetHandlerProps = {
+      const props: ExerciseModifierProps = {
         sets: []
       }
-      const wrapper = shallow(<SetHandlerComponent {...props} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...props} />)
       expect(wrapper).toMatchSnapshot()
     })
 
-    const sharedProps: SetHandlerProps = {
+    const sharedProps: ExerciseModifierProps = {
       initSet: {
         reps: 1,
         weight: 170
@@ -31,21 +34,21 @@ describe('SetHandlerComponent', () => {
     }
 
     it('should match snapshot for multiple sets', () => {
-      const wrapper = shallow(<SetHandlerComponent {...sharedProps} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...sharedProps} />)
       expect(wrapper).toMatchSnapshot()
     })
 
     it('should call callback when adding a set', () => {
       const cb = jest.fn()
 
-      const props: SetHandlerProps = {
+      const props: ExerciseModifierProps = {
         onAddSet: cb,
         ...sharedProps
       }
 
-      const wrapper = shallow(<SetHandlerComponent {...props} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...props} />)
       wrapper
-        .find(SetChooserComponent)
+        .find(SetModifierComponent)
         .first()
         .props().onLeftButtonPress!()
 
@@ -53,56 +56,56 @@ describe('SetHandlerComponent', () => {
     })
 
     it('should be able to clear the current set weights', () => {
-      const wrapper = shallow(<SetHandlerComponent {...sharedProps} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...sharedProps} />)
       wrapper
-        .find(SetChooserComponent)
+        .find(SetModifierComponent)
         .first()
         .props().onRightButtonPress!()
 
-      expect((wrapper.instance() as SetHandlerComponent).state.current).toEqual(
-        { reps: 0, weight: 0 }
-      )
+      expect(
+        (wrapper.instance() as ExerciseModifierComponent).state.current
+      ).toEqual({ reps: 0, weight: 0 })
     })
 
     it('should call callback when deleting a set', () => {
       const cb = jest.fn()
 
-      const props: SetHandlerProps = {
+      const props: ExerciseModifierProps = {
         onDeleteSet: cb,
         selected: 1,
         ...sharedProps
       }
 
-      const wrapper = shallow(<SetHandlerComponent {...props} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...props} />)
       wrapper
-        .find(SetChooserComponent)
+        .find(SetModifierComponent)
         .first()
         .props().onRightButtonPress!()
 
       expect(cb.mock.calls).toEqual([[props.selected]])
       expect(
-        (wrapper.instance() as SetHandlerComponent).state.selected
+        (wrapper.instance() as ExerciseModifierComponent).state.selected
       ).toBeUndefined()
     })
 
     it('should call callback when modifying a set', () => {
       const cb = jest.fn()
 
-      const props: SetHandlerProps = {
+      const props: ExerciseModifierProps = {
         onModifySet: cb,
         selected: 1,
         ...sharedProps
       }
 
-      const wrapper = shallow(<SetHandlerComponent {...props} />)
+      const wrapper = shallow(<ExerciseModifierComponent {...props} />)
       wrapper
-        .find(SetChooserComponent)
+        .find(SetModifierComponent)
         .first()
         .props().onLeftButtonPress!()
 
       expect(cb.mock.calls).toEqual([[props.selected, props.initSet]])
       expect(
-        (wrapper.instance() as SetHandlerComponent).state.selected
+        (wrapper.instance() as ExerciseModifierComponent).state.selected
       ).toBeUndefined()
     })
   })

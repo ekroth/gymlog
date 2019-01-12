@@ -10,7 +10,7 @@ export type NumberInputProps = {
   type: 'number' | 'real'
 }
 
-export const NumberInput = (props: NumberInputProps) => (
+export const NumberInputComponent = (props: NumberInputProps) => (
   <Grid style={{ alignItems: 'center' }}>
     <Col style={{ minWidth: 20 }}>
       <Button

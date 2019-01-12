@@ -4,10 +4,10 @@ import {
   TextInputSubmitEditingEventData
 } from 'react-native'
 import { shallow } from 'enzyme'
-import { NumberInput, NumberInputProps } from '../NumberInput'
+import { NumberInputComponent, NumberInputProps } from '../NumberInput'
 import { Input } from 'native-base'
 
-describe('SetHandlerComponent', () => {
+describe('NumberInput', () => {
   describe('rendering', () => {
     it('should match snapshot', () => {
       const props: NumberInputProps = {
@@ -16,7 +16,7 @@ describe('SetHandlerComponent', () => {
         type: 'real',
         value: 100
       }
-      const wrapper = shallow(<NumberInput {...props} />)
+      const wrapper = shallow(<NumberInputComponent {...props} />)
       expect(wrapper).toMatchSnapshot()
     })
 
@@ -42,7 +42,7 @@ describe('SetHandlerComponent', () => {
         type: 'real',
         value: 120
       }
-      const wrapper = shallow(<NumberInput {...props} />)
+      const wrapper = shallow(<NumberInputComponent {...props} />)
       const input = wrapper.find(Input).first()
 
       input.props().onSubmitEditing!(event1)

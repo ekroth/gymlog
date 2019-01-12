@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Text, Grid, Row, Col } from 'native-base'
-import { NumberInput } from './NumberInput'
+import { NumberInputComponent } from './NumberInput'
 
-type SetChooserProps = {
+type SetModifierProps = {
   onSetWeight?: (weight: number) => void
   onSetReps?: (weight: number) => void
 
@@ -16,10 +16,10 @@ type SetChooserProps = {
   initReps: number
 }
 
-export const SetChooserComponent = (props: SetChooserProps) => (
+export const SetModifierComponent = (props: SetModifierProps) => (
   <Grid style={{ alignItems: 'center' }}>
     <Row>
-      <NumberInput
+      <NumberInputComponent
         type={'number'}
         value={props.initWeight}
         onChange={props.onSetWeight}
@@ -28,7 +28,7 @@ export const SetChooserComponent = (props: SetChooserProps) => (
       />
     </Row>
     <Row>
-      <NumberInput
+      <NumberInputComponent
         type={'real'}
         value={props.initReps}
         onChange={props.onSetReps}

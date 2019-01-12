@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SetHandlerComponent rendering should match snapshot for multiple sets 1`] = `
+exports[`ExerciseModifier rendering should match snapshot for multiple sets 1`] = `
 <GridNB>
   <RowNB
     size={40}
@@ -57,7 +57,7 @@ exports[`SetHandlerComponent rendering should match snapshot for multiple sets 1
 </GridNB>
 `;
 
-exports[`SetHandlerComponent rendering should match snapshot for zero sets 1`] = `
+exports[`ExerciseModifier rendering should match snapshot for zero sets 1`] = `
 <GridNB>
   <RowNB
     size={40}

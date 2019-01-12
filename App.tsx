@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
 import { Container, Header, Text } from 'native-base'
-import { SetHandlerComponent } from './src/components/SetHandler'
+import { ExerciseModifierComponent } from './src/components/ExerciseModifier'
 import { AppContainer } from './src/containers/App'
 
 const testState = new AppContainer({
@@ -22,7 +22,7 @@ export default class App extends PureComponent {
               <Header>
                 <Text style={{ alignSelf: 'center' }}>Add Sets</Text>
               </Header>
-              <SetHandlerComponent
+              <ExerciseModifierComponent
                 onAddSet={container.addSet}
                 onModifySet={container.modifySet}
                 onDeleteSet={container.deleteSet}

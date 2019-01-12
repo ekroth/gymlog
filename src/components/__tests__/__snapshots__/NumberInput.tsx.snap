@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SetHandlerComponent rendering should match snapshot 1`] = `
+exports[`NumberInput rendering should match snapshot 1`] = `
 <GridNB
   style={
     Object {

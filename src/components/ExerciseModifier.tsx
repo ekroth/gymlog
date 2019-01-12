@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
 import Set from '../model/Set'
 import { Grid, Row } from 'native-base'
-import { SetChooserComponent } from './SetChooser'
+import { SetModifierComponent } from './SetModifier'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { SetItemComponent } from './SetItem'
 import { callback1, callback2 } from '../util/Callbacks'
 
-export type SetHandlerProps = {
+export type ExerciseModifierProps = {
   onAddSet?: (set: Set) => void
   onDeleteSet?: (index: number) => void
   onModifySet?: (index: number, set: Set) => void
@@ -17,16 +17,16 @@ export type SetHandlerProps = {
   selected?: number
 }
 
-export type SetHandlerState = {
+export type ExerciseModifierState = {
   current: Set
   selected?: number
 }
 
-export class SetHandlerComponent extends PureComponent<
-  SetHandlerProps,
-  SetHandlerState
+export class ExerciseModifierComponent extends PureComponent<
+  ExerciseModifierProps,
+  ExerciseModifierState
 > {
-  constructor(props: SetHandlerProps) {
+  constructor(props: ExerciseModifierProps) {
     super(props)
     this.state = {
       current: props.initSet || { weight: 0, reps: 0 },
@@ -38,7 +38,7 @@ export class SetHandlerComponent extends PureComponent<
     return (
       <Grid>
         <Row size={40}>
-          <SetChooserComponent
+          <SetModifierComponent
             onSetReps={this.onSetReps}
             onSetWeight={this.onSetWeight}
             onLeftButtonPress={this.onLeftButtonPress}

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { SetItemComponent, SetItemProps } from '../SetItem'
 import { ListItem } from 'native-base'
 
-describe('SetItemComponent', () => {
+describe('SetItem', () => {
   describe('rendering', () => {
     it('should match snapshot', () => {
       const props: SetItemProps = {
