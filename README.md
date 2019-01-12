@@ -1,4 +1,4 @@
-# gymlog
+# gymlog [![Build Status](https://travis-ci.org/ekroth/gymlog.svg?branch=master)](https://travis-ci.org/ekroth/gymlog)
 
 ## Build
 
