@@ -52,6 +52,18 @@ describe('SetHandlerComponent', () => {
       expect(cb.mock.calls.length).toEqual(1)
     })
 
+    it('should be able to clear the current set weights', () => {
+      const wrapper = shallow(<SetHandlerComponent {...sharedProps} />)
+      wrapper
+        .find(SetChooserComponent)
+        .first()
+        .props().onRightButtonPress!()
+
+      expect((wrapper.instance() as SetHandlerComponent).state.current).toEqual(
+        { reps: 0, weight: 0 }
+      )
+    })
+
     it('should call callback when deleting a set', () => {
       const cb = jest.fn()
 
@@ -68,6 +80,9 @@ describe('SetHandlerComponent', () => {
         .props().onRightButtonPress!()
 
       expect(cb.mock.calls).toEqual([[props.selected]])
+      expect(
+        (wrapper.instance() as SetHandlerComponent).state.selected
+      ).toBeUndefined()
     })
 
     it('should call callback when modifying a set', () => {
@@ -86,6 +101,9 @@ describe('SetHandlerComponent', () => {
         .props().onLeftButtonPress!()
 
       expect(cb.mock.calls).toEqual([[props.selected, props.initSet]])
+      expect(
+        (wrapper.instance() as SetHandlerComponent).state.selected
+      ).toBeUndefined()
     })
   })
 })
