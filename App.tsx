@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Provider, Subscribe } from 'unstated'
+import { Alert } from 'react-native'
 import { Container, Header, Text } from 'native-base'
-import { WorkoutModifierComponent } from './src/components/WorkoutModifier'
+import { WorkoutNavigator } from './src/components/WorkoutModifier'
 import { WorkoutContainer } from './src/containers/Workout'
 
 const testState = new WorkoutContainer({
@@ -26,14 +27,24 @@ export default class App extends PureComponent {
     return (
       <Provider inject={[testState]}>
         <Subscribe to={[WorkoutContainer]}>
-          {(container: WorkoutContainer) => (
-            <Container>
-              <Header>
-                <Text style={{ alignSelf: 'center' }}>Workouts</Text>
-              </Header>
-              <WorkoutModifierComponent exercises={container.state.exercises} />
-            </Container>
-          )}
+          {(container: WorkoutContainer) => {
+            const AppNavigator = WorkoutNavigator({
+              exercises: container.state.exercises,
+              onModifyExercise: (index, exercise) => {
+                Alert.alert(`${index} and ${JSON.stringify(exercise)}`)
+                container.modifyExercise(index, exercise)
+                return
+              }
+            })
+            return (
+              <Container>
+                <Header>
+                  <Text style={{ alignSelf: 'center' }}>Workouts</Text>
+                </Header>
+                <AppNavigator />
+              </Container>
+            )
+          }}
         </Subscribe>
       </Provider>
     )

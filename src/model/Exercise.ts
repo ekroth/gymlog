@@ -6,15 +6,21 @@ export default interface Exercise {
   readonly sets: ReadonlyArray<Set>
 }
 
-export const addSet = (exercise: Exercise, set: Set) => ({
-  sets: [...exercise.sets, set],
-  ...exercise
+export const addSet = (exercise: Exercise, set: Set): Exercise => ({
+  ...exercise,
+  sets: [...exercise.sets, set]
 })
 
-export const modifySet = (exercise: Exercise, index: number, set: Set) => ({
+export const modifySet = (
+  exercise: Exercise,
+  index: number,
+  set: Set
+): Exercise => ({
+  ...exercise,
   sets: arrayUpdate(exercise.sets, set, index)
 })
 
-export const deleteSet = (exercise: Exercise, index: number) => ({
+export const deleteSet = (exercise: Exercise, index: number): Exercise => ({
+  ...exercise,
   sets: arrayRemove(exercise.sets, index)
 })
