@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
-import { Provider, Subscribe } from 'unstated'
-import { Alert } from 'react-native'
+import { Provider } from 'unstated'
 import { Container, Header, Text } from 'native-base'
-import { WorkoutNavigator } from './src/components/WorkoutModifier'
-import { WorkoutContainer } from './src/containers/Workout'
+import { WorkoutStore } from './src/stores/Workout'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
+import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
 
-const testState = new WorkoutContainer({
+const testState = new WorkoutStore({
   exercises: [
     {
       name: 'Squat',
@@ -22,71 +23,33 @@ const testState = new WorkoutContainer({
   ]
 })
 
-export default class App extends PureComponent {
-  public render() {
-    return (
-      <Provider inject={[testState]}>
-        <Subscribe to={[WorkoutContainer]}>
-          {(container: WorkoutContainer) => {
-            const AppNavigator = WorkoutNavigator({
-              exercises: container.state.exercises,
-              onModifyExercise: (index, exercise) => {
-                Alert.alert(`${index} and ${JSON.stringify(exercise)}`)
-                container.modifyExercise(index, exercise)
-                return
-              }
-            })
-            return (
-              <Container>
-                <Header>
-                  <Text style={{ alignSelf: 'center' }}>Workouts</Text>
-                </Header>
-                <AppNavigator />
-              </Container>
-            )
-          }}
-        </Subscribe>
-      </Provider>
-    )
-  }
-}
-
-/*import React, { PureComponent } from 'react'
-import { Provider, Subscribe } from 'unstated'
-import { Container, Header, Text } from 'native-base'
-import { ExerciseModifierComponent } from './src/components/ExerciseModifier'
-import { AppContainer } from './src/containers/App'
-
-const testState = new AppContainer({
-  sets: [
-    { weight: 120, reps: 50 },
-    { weight: 150, reps: 1 },
-    { weight: 177.5, reps: 0 }
-  ]
-})
+const WorkoutNavigator = createAppContainer(
+  createStackNavigator(
+    {
+      ExerciseModifierScreen: {
+        screen: ExerciseModifierScreen
+      },
+      WorkoutModifierScreen: {
+        screen: WorkoutModifierScreen
+      }
+    },
+    {
+      initialRouteName: 'WorkoutModifierScreen'
+    }
+  )
+)
 
 export default class App extends PureComponent {
   public render() {
     return (
       <Provider inject={[testState]}>
-        <Subscribe to={[AppContainer]}>
-          {(container: AppContainer) => (
-            <Container>
-              <Header>
-                <Text style={{ alignSelf: 'center' }}>Add Sets</Text>
-              </Header>
-              <ExerciseModifierComponent
-                onAddSet={container.addSet}
-                onModifySet={container.modifySet}
-                onDeleteSet={container.deleteSet}
-                sets={container.state.sets}
-                initSet={container.state.sets[container.state.sets.length - 1]}
-              />
-            </Container>
-          )}
-        </Subscribe>
+        <Container>
+          <Header>
+            <Text style={{ alignSelf: 'center' }}>Workouts</Text>
+          </Header>
+          <WorkoutNavigator />
+        </Container>
       </Provider>
     )
   }
 }
-*/
