@@ -19,7 +19,7 @@ exports[`SetItem rendering should match snapshot 1`] = `
           }
         }
       >
-        0
+        1
       </Styled(Text)>
     </ColumnNB>
     <ColumnNB

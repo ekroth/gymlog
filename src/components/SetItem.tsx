@@ -22,7 +22,7 @@ export const SetItemComponent = ({
   >
     <Grid>
       <Col size={20}>
-        <Text style={{ fontWeight: 'bold' }}>{index}</Text>
+        <Text style={{ fontWeight: 'bold' }}>{index + 1}</Text>
       </Col>
       <Col size={60}>
         <Grid>
