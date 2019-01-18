@@ -1,5 +1,6 @@
+import { Button, Col, Grid, Row, Text } from 'native-base'
 import React from 'react'
-import { Button, Text, Grid, Row, Col } from 'native-base'
+
 import { NumberInputComponent } from './NumberInput'
 
 type SetModifierProps = {

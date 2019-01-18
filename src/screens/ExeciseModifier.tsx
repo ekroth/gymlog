@@ -1,8 +1,9 @@
 import React from 'react'
 import { Subscribe } from 'unstated'
-import { WorkoutStore } from '../stores/Workout'
+
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
-import { addSet, modifySet, deleteSet } from '../model/Exercise'
+import { addSet, deleteSet, modifySet } from '../model/Exercise'
+import { WorkoutStore } from '../stores/Workout'
 
 export class ExerciseModifierScreenContainer extends React.Component {
   public render() {

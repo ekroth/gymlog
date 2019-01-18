@@ -1,10 +1,8 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+
+import { ExerciseModifierComponent, ExerciseModifierProps } from '../ExerciseModifier'
 import { SetModifierComponent } from '../SetModifier'
-import {
-  ExerciseModifierComponent,
-  ExerciseModifierProps
-} from '../ExerciseModifier'
 
 describe('ExerciseModifier', () => {
   describe('rendering', () => {

@@ -1,11 +1,12 @@
+import { Grid, Row } from 'native-base'
 import React, { PureComponent } from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
+
 import Set from '../model/Set'
-import { Grid, Row } from 'native-base'
-import { SetModifierComponent } from './SetModifier'
+import { callback1, callback2 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { SetItemComponent } from './SetItem'
-import { callback1, callback2 } from '../util/Callbacks'
+import { SetModifierComponent } from './SetModifier'
 
 export type ExerciseModifierProps = {
   onAddSet?: (set: Set) => void

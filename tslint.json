@@ -15,7 +15,7 @@
     "import-name": false,
     "variable-name": false,
     "interface-name": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
     "jsx-no-lambda": false,
     "jsx-no-bind": true,
     "prefer-array-literal": [true, { "allow-type-parameters": true }],

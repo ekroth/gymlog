@@ -1,11 +1,9 @@
-import React from 'react'
-import {
-  NativeSyntheticEvent,
-  TextInputSubmitEditingEventData
-} from 'react-native'
 import { shallow } from 'enzyme'
-import { NumberInputComponent, NumberInputProps } from '../NumberInput'
 import { Input } from 'native-base'
+import React from 'react'
+import { NativeSyntheticEvent, TextInputSubmitEditingEventData } from 'react-native'
+
+import { NumberInputComponent, NumberInputProps } from '../NumberInput'
 
 describe('NumberInput', () => {
   describe('rendering', () => {

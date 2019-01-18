@@ -1,5 +1,6 @@
+import { Button, Col, Grid, Icon, Input } from 'native-base'
 import React from 'react'
-import { Button, Grid, Col, Input, Icon } from 'native-base'
+
 import { callback1 } from '../util/Callbacks'
 
 export type NumberInputProps = {

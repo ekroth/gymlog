@@ -1,7 +1,8 @@
-import React from 'react'
 import { shallow } from 'enzyme'
-import { SetItemComponent, SetItemProps } from '../SetItem'
 import { ListItem } from 'native-base'
+import React from 'react'
+
+import { SetItemComponent, SetItemProps } from '../SetItem'
 
 describe('SetItem', () => {
   describe('rendering', () => {

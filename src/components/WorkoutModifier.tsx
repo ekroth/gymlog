@@ -1,10 +1,11 @@
-import Exercise from '../model/Exercise'
+import { Col, Grid, View } from 'native-base'
 import React from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
-import { keyExtractorIndex } from '../util/FlatListUtils'
-import { Grid, Col, View } from 'native-base'
-import { ExercisePreviewComponent } from './ExercisePreview'
+
+import Exercise from '../model/Exercise'
 import { callback1 } from '../util/Callbacks'
+import { keyExtractorIndex } from '../util/FlatListUtils'
+import { ExercisePreviewComponent } from './ExercisePreview'
 
 export type WorkoutModifierProps = {
   onAddExercise?: (name: string) => void

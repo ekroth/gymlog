@@ -1,11 +1,12 @@
+import { Grid, Row, Text } from 'native-base'
 import React from 'react'
 import { FlatList, ListRenderItemInfo, TouchableOpacity } from 'react-native'
-import Set from '../model/Set'
+
 import Exercise from '../model/Exercise'
-import { Grid, Row, Text } from 'native-base'
+import Set from '../model/Set'
+import { callback0 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { SetItemComponent } from './SetItem'
-import { callback0 } from '../util/Callbacks'
 
 export type ExercisePreviewProps = {
   onPress?: () => void

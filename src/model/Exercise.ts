@@ -1,5 +1,5 @@
+import { arrayRemove, arrayUpdate } from '../util/ReadonlyArrayUtils'
 import Set from './Set'
-import { arrayUpdate, arrayRemove } from '../util/ReadonlyArrayUtils'
 
 export default interface Exercise {
   readonly name: string

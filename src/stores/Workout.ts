@@ -1,4 +1,5 @@
 import { Container } from 'unstated'
+
 import Exercise from '../model/Exercise'
 import { arrayRemove, arrayUpdate } from '../util/ReadonlyArrayUtils'
 
