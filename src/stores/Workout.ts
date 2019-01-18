@@ -4,7 +4,7 @@ import { arrayRemove, arrayUpdate } from '../util/ReadonlyArrayUtils'
 
 export type WorkoutState = {
   exercises: ReadonlyArray<Exercise>
-  selectedExercise?: number
+  selectedExercise: number
 }
 
 export type WorkoutProps = {
@@ -19,7 +19,8 @@ export class WorkoutStore extends Container<WorkoutState> {
   ) {
     super()
     this.state = {
-      exercises: props.exercises
+      exercises: props.exercises,
+      selectedExercise: 0
     }
   }
 

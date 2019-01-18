@@ -4,7 +4,7 @@ import { Container, Header, Text } from 'native-base'
 import { WorkoutStore } from './src/stores/Workout'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
-import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
+import { ExerciseModifierScreenContainer } from './src/screens/ExeciseModifier'
 
 const testState = new WorkoutStore({
   exercises: [
@@ -27,7 +27,7 @@ const WorkoutNavigator = createAppContainer(
   createStackNavigator(
     {
       ExerciseModifierScreen: {
-        screen: ExerciseModifierScreen
+        screen: ExerciseModifierScreenContainer
       },
       WorkoutModifierScreen: {
         screen: WorkoutModifierScreen
