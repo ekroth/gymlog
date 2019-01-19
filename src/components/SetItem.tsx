@@ -1,7 +1,7 @@
 import { Col, Grid, ListItem, Subtitle, Text } from 'native-base'
 import React from 'react'
 
-import Set from '../model/Set'
+import { Set } from '../model/Set'
 
 export type SetItemProps = {
   onPress?: () => void

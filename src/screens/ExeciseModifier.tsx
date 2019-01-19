@@ -14,6 +14,7 @@ export type ExerciseModifierNavigationParams = {
   // Convenience copy for React Navigation Header
   exerciseName: string
   selectedExercise: number
+  selectedWorkout: number
   exerciseColor: string
 }
 
@@ -30,48 +31,50 @@ export class ExerciseModifierScreen extends React.Component<
   public render() {
     const selectedExercise = this.props.navigation.state.params!
       .selectedExercise
+    const selectedWorkout = this.props.navigation.state.params!.selectedWorkout
 
     return (
       <Subscribe to={[WorkoutStore]}>
-        {(store: WorkoutStore) => (
-          <ExerciseModifierComponent
-            onAddSet={set => {
-              store.modifyWorkout(
-                modifyExercise(
-                  store.state.workout,
-                  selectedExercise,
-                  addSet(store.state.workout.exercises[selectedExercise], set)
+        {(store: WorkoutStore) => {
+          const workout = store.state.workouts[selectedWorkout]
+          const exercise = workout.exercises[selectedExercise]
+
+          return (
+            <ExerciseModifierComponent
+              onAddSet={set => {
+                store.modifyWorkout(
+                  modifyExercise(
+                    workout,
+                    selectedExercise,
+                    addSet(exercise, set)
+                  ),
+                  selectedWorkout
                 )
-              )
-            }}
-            onModifySet={(index, set) => {
-              store.modifyWorkout(
-                modifyExercise(
-                  store.state.workout,
-                  selectedExercise,
-                  modifySet(
-                    store.state.workout.exercises[selectedExercise],
-                    index,
-                    set
-                  )
+              }}
+              onModifySet={(index, set) => {
+                store.modifyWorkout(
+                  modifyExercise(
+                    workout,
+                    selectedExercise,
+                    modifySet(exercise, index, set)
+                  ),
+                  selectedWorkout
                 )
-              )
-            }}
-            onDeleteSet={index => {
-              store.modifyWorkout(
-                modifyExercise(
-                  store.state.workout,
-                  selectedExercise,
-                  deleteSet(
-                    store.state.workout.exercises[selectedExercise],
-                    index
-                  )
+              }}
+              onDeleteSet={index => {
+                store.modifyWorkout(
+                  modifyExercise(
+                    workout,
+                    selectedExercise,
+                    deleteSet(exercise, index)
+                  ),
+                  selectedWorkout
                 )
-              )
-            }}
-            sets={store.state.workout.exercises[selectedExercise].sets}
-          />
-        )}
+              }}
+              sets={exercise.sets}
+            />
+          )
+        }}
       </Subscribe>
     )
   }
