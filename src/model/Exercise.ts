@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUpdate } from '../util/ReadonlyArrayUtils'
+import { iterableRemove, iterableUpdate } from '../util/IterableUtils'
 import Set from './Set'
 
 export default interface Exercise {
@@ -18,10 +18,10 @@ export const modifySet = (
   set: Set
 ): Exercise => ({
   ...exercise,
-  sets: arrayUpdate(exercise.sets, set, index)
+  sets: iterableUpdate(exercise.sets, set, index)
 })
 
 export const deleteSet = (exercise: Exercise, index: number): Exercise => ({
   ...exercise,
-  sets: arrayRemove(exercise.sets, index)
+  sets: iterableRemove(exercise.sets, index)
 })
