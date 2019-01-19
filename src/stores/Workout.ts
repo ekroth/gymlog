@@ -12,7 +12,7 @@ export type WorkoutProps = {
 export class WorkoutStore extends Container<WorkoutState> {
   constructor(
     props: WorkoutProps = {
-      workout: { exercises: [] }
+      workout: { date: new Date(), exercises: [] }
     }
   ) {
     super()

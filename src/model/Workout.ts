@@ -2,6 +2,7 @@ import { arrayRemove, arrayUpdate } from '../util/ReadonlyArrayUtils'
 import Exercise from './Exercise'
 
 export default interface Workout {
+  readonly date: Date
   readonly exercises: ReadonlyArray<Exercise>
 }
 

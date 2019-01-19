@@ -9,6 +9,7 @@ import { WorkoutStore } from './src/stores/Workout'
 
 const testState = new WorkoutStore({
   workout: {
+    date: new Date(),
     exercises: [
       {
         name: 'Squat',
