@@ -1,45 +1,59 @@
 import React from 'react'
+import {
+  NavigationScreenOptions,
+  NavigationScreenProps
+} from 'react-navigation'
 import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
 import { addSet, deleteSet, modifySet } from '../model/Exercise'
 import { WorkoutStore } from '../stores/Workout'
 
-export class ExerciseModifierScreenContainer extends React.Component {
+export type ExerciseModifierNavigationParams = {
+  // Convenience copy for React Navigation Header
+  exerciseName: string
+  selectedExercise: number
+}
+
+export class ExerciseModifierScreen extends React.Component<
+  NavigationScreenProps<ExerciseModifierNavigationParams>
+> {
+  public static navigationOptions = (
+    props: NavigationScreenProps<ExerciseModifierNavigationParams>
+  ): NavigationScreenOptions => ({
+    title: props.navigation.state.params!.exerciseName
+  })
+
   public render() {
+    const selectedExercise = this.props.navigation.state.params!
+      .selectedExercise
+
     return (
       <Subscribe to={[WorkoutStore]}>
-        {(store: WorkoutStore) => <ExerciseModifierScreen store={store} />}
+        {(store: WorkoutStore) => (
+          <ExerciseModifierComponent
+            onAddSet={set => {
+              store.modifyExercise(
+                selectedExercise,
+                addSet(store.state.exercises[selectedExercise], set)
+              )
+            }}
+            onModifySet={(index, set) => {
+              store.modifyExercise(
+                selectedExercise,
+                modifySet(store.state.exercises[selectedExercise], index, set)
+              )
+            }}
+            onDeleteSet={index => {
+              store.modifyExercise(
+                selectedExercise,
+                deleteSet(store.state.exercises[selectedExercise], index)
+              )
+            }}
+            sets={store.state.exercises[selectedExercise].sets}
+          />
+        )}
       </Subscribe>
-    )
-  }
-}
-
-type ExerciseModifierScreenProps = {
-  store: WorkoutStore
-}
-
-class ExerciseModifierScreen extends React.Component<
-  ExerciseModifierScreenProps
-> {
-  public render() {
-    const store = this.props.store
-    const selected = store.state.selectedExercise
-    const exercise = store.state.exercises[selected]
-
-    return (
-      <ExerciseModifierComponent
-        onAddSet={set => {
-          store.modifyExercise(selected, addSet(exercise, set))
-        }}
-        onModifySet={(index, set) => {
-          store.modifyExercise(selected, modifySet(exercise, index, set))
-        }}
-        onDeleteSet={index => {
-          store.modifyExercise(selected, deleteSet(exercise, index))
-        }}
-        sets={exercise.sets}
-      />
     )
   }
 }

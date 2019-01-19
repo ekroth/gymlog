@@ -4,6 +4,7 @@ import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
 import { WorkoutStore } from '../stores/Workout'
+import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 
 export class WorkoutModifierScreen extends React.Component<
   NavigationScreenProps
@@ -16,9 +17,13 @@ export class WorkoutModifierScreen extends React.Component<
             onAddExercise={store.addExercise}
             onModifyExercise={store.modifyExercise}
             onDeleteExercise={store.deleteExercise}
-            onSelectExercise={async index => {
-              await store.selectExercise(index)
-              this.props.navigation.navigate('ExerciseModifierScreen')
+            onSelectExercise={index => {
+              const params: ExerciseModifierNavigationParams = {
+                exerciseName: store.state.exercises[index].name,
+                selectedExercise: index
+              }
+
+              this.props.navigation.navigate('ExerciseModifierScreen', params)
             }}
             exercises={store.state.exercises}
           />

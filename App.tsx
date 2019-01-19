@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react'
-import { Provider } from 'unstated'
 import { Container, Header, Text } from 'native-base'
-import { WorkoutStore } from './src/stores/Workout'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import React, { PureComponent } from 'react'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { Provider } from 'unstated'
+
+import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
 import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
-import { ExerciseModifierScreenContainer } from './src/screens/ExeciseModifier'
+import { WorkoutStore } from './src/stores/Workout'
 
 const testState = new WorkoutStore({
   exercises: [
@@ -27,7 +28,7 @@ const WorkoutNavigator = createAppContainer(
   createStackNavigator(
     {
       ExerciseModifierScreen: {
-        screen: ExerciseModifierScreenContainer
+        screen: ExerciseModifierScreen
       },
       WorkoutModifierScreen: {
         screen: WorkoutModifierScreen
