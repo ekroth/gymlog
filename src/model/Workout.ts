@@ -1,4 +1,4 @@
-import { iterableRemove, iterableUpdate } from '../util/IterableUtils'
+import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
 import Exercise from './Exercise'
 
 export default interface Workout {
@@ -17,10 +17,10 @@ export const modifyExercise = (
   exercise: Exercise
 ) => ({
   ...workout,
-  exercises: iterableUpdate(workout.exercises, exercise, index)
+  exercises: arrayUpdate(workout.exercises, exercise, index)
 })
 
 export const deleteExercise = (workout: Workout, index: number) => ({
   ...workout,
-  exercises: iterableRemove(workout.exercises, index)
+  exercises: arrayRemove(workout.exercises, index)
 })
