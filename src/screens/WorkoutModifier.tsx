@@ -6,7 +6,6 @@ import {
 import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
-import { addExercise, deleteExercise, modifyExercise } from '../model/Workout'
 import { WorkoutStore } from '../stores/Workout'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 
@@ -31,39 +30,24 @@ export class WorkoutModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => {
-          const workout = store.state.workouts[selectedWorkout]
+          const workout = store.workoutHandler(selectedWorkout)
 
           return (
             <WorkoutModifierComponent
-              onAddExercise={exercise =>
-                store.modifyWorkout(
-                  addExercise(workout, exercise),
-                  selectedWorkout
-                )
-              }
-              onModifyExercise={(index, exercise) =>
-                store.modifyWorkout(
-                  modifyExercise(workout, index, exercise),
-                  selectedWorkout
-                )
-              }
-              onDeleteExercise={index =>
-                store.modifyWorkout(
-                  deleteExercise(workout, index),
-                  selectedWorkout
-                )
-              }
+              onAddExercise={workout.addExercise}
+              onModifyExercise={workout.modifyExercise}
+              onDeleteExercise={workout.deleteExercise}
               onSelectExercise={index => {
                 const params: ExerciseModifierNavigationParams = {
                   selectedWorkout,
-                  exerciseName: workout.exercises[index].name,
+                  exerciseName: workout.getExercise(index).name,
                   selectedExercise: index,
-                  exerciseColor: workout.exercises[index].color
+                  exerciseColor: workout.getExercise(index).color
                 }
 
                 this.props.navigation.navigate('ExerciseModifierScreen', params)
               }}
-              exercises={workout.exercises}
+              exercises={workout.getWorkout().exercises}
             />
           )
         }}

@@ -6,8 +6,6 @@ import {
 import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
-import { addSet, deleteSet, modifySet } from '../model/Exercise'
-import { modifyExercise } from '../model/Workout'
 import { WorkoutStore } from '../stores/Workout'
 
 export type ExerciseModifierNavigationParams = {
@@ -36,42 +34,15 @@ export class ExerciseModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => {
-          const workout = store.state.workouts[selectedWorkout]
-          const exercise = workout.exercises[selectedExercise]
+          const workout = store.workoutHandler(selectedWorkout)
+          const exercise = workout.exerciseHandler(selectedExercise)
 
           return (
             <ExerciseModifierComponent
-              onAddSet={set => {
-                store.modifyWorkout(
-                  modifyExercise(
-                    workout,
-                    selectedExercise,
-                    addSet(exercise, set)
-                  ),
-                  selectedWorkout
-                )
-              }}
-              onModifySet={(index, set) => {
-                store.modifyWorkout(
-                  modifyExercise(
-                    workout,
-                    selectedExercise,
-                    modifySet(exercise, index, set)
-                  ),
-                  selectedWorkout
-                )
-              }}
-              onDeleteSet={index => {
-                store.modifyWorkout(
-                  modifyExercise(
-                    workout,
-                    selectedExercise,
-                    deleteSet(exercise, index)
-                  ),
-                  selectedWorkout
-                )
-              }}
-              sets={exercise.sets}
+              onAddSet={exercise.addSet}
+              onModifySet={exercise.modifySet}
+              onDeleteSet={exercise.deleteSet}
+              sets={exercise.getExercise().sets}
             />
           )
         }}
