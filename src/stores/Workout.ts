@@ -29,22 +29,22 @@ export class ExerciseHandler {
     this.index = index
   }
 
-  public addSet(set: Set) {
+  public addSet = (set: Set) => {
     this.store.modifyExercise(this.index, addSet(this.getExercise(), set))
   }
 
-  public deleteSet(index: number) {
+  public deleteSet = (index: number) => {
     this.store.modifyExercise(this.index, deleteSet(this.getExercise(), index))
   }
 
-  public modifySet(index: number, set: Set) {
+  public modifySet = (index: number, set: Set) => {
     this.store.modifyExercise(
       this.index,
       modifySet(this.getExercise(), index, set)
     )
   }
 
-  public getExercise() {
+  public getExercise = () => {
     return this.store.getExercise(this.index)
   }
 }
@@ -58,34 +58,34 @@ export class WorkoutHandler {
     this.index = index
   }
 
-  public exerciseHandler(index: number) {
+  public exerciseHandler = (index: number) => {
     return new ExerciseHandler(this, index)
   }
 
-  public addExercise(name: string) {
+  public getWorkout = () => {
+    return this.store.state.workouts[this.index]
+  }
+
+  public addExercise = (name: string) => {
     this.store.modifyWorkout(addExercise(this.getWorkout(), name), this.index)
   }
 
-  public deleteExercise(index: number) {
+  public deleteExercise = (index: number) => {
     this.store.modifyWorkout(
       deleteExercise(this.getWorkout(), index),
       this.index
     )
   }
 
-  public modifyExercise(index: number, exercise: Exercise) {
+  public modifyExercise = (index: number, exercise: Exercise) => {
     this.store.modifyWorkout(
       modifyExercise(this.getWorkout(), index, exercise),
       this.index
     )
   }
 
-  public getExercise(index: number) {
+  public getExercise = (index: number) => {
     return this.getWorkout().exercises[index]
-  }
-
-  public getWorkout() {
-    return this.store.state.workouts[this.index]
   }
 }
 
@@ -99,7 +99,7 @@ export class WorkoutStore extends Container<WorkoutState> {
     this.state = props
   }
 
-  public workoutHandler(index: number) {
+  public workoutHandler = (index: number) => {
     return new WorkoutHandler(this, index)
   }
 
