@@ -1,5 +1,3 @@
-import { isArray } from 'util'
-
 export const iterableFlatten = <T>(
   iterables: Iterable<Iterable<T>>
 ): ReadonlyArray<T> => {
@@ -23,7 +21,7 @@ export const iterableInsert = <T>(
   item: T,
   index: number
 ): ReadonlyArray<T> => {
-  if (isArray(iterable)) {
+  if (Array.isArray(iterable)) {
     return arrayInsert(iterable as T[], item, index)
   }
 
@@ -34,7 +32,7 @@ export const iterableRemove = <T>(
   iterable: Iterable<T>,
   index: number
 ): ReadonlyArray<T> => {
-  if (isArray(iterable)) {
+  if (Array.isArray(iterable)) {
     return arrayRemove(iterable as T[], index)
   }
 
@@ -46,7 +44,7 @@ export const iterableUpdate = <T>(
   item: T,
   index: number
 ): ReadonlyArray<T> => {
-  if (isArray(iterable)) {
+  if (Array.isArray(iterable)) {
     return arrayUpdate(iterable as T[], item, index)
   }
 
@@ -54,11 +52,23 @@ export const iterableUpdate = <T>(
 }
 
 export const iterableUnique = <T>(iterable: Iterable<T>): ReadonlyArray<T> => {
-  if (isArray(iterable)) {
+  if (Array.isArray(iterable)) {
     return arrayUnique(iterable as T[])
   }
 
   return err(iterable)
+}
+
+export const iterableToUnnamed = <V>(
+  iterable: Iterable<{ [_: string]: V } & object>
+): { [_: string]: V } => {
+  let out: { [_: string]: V } = {}
+
+  for (const o of iterable) {
+    out = { ...out, ...o }
+  }
+
+  return out
 }
 
 /* Private array implementations */

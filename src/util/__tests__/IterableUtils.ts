@@ -1,6 +1,9 @@
 import {
+  iterableFlatten,
   iterableInsert,
   iterableRemove,
+  iterableToUnnamed,
+  iterableUnique,
   iterableUpdate
 } from '../IterableUtils'
 
@@ -18,4 +21,25 @@ test('iterableRemove', () => {
 test('iterableUpdate', () => {
   expect(iterableUpdate([], 1, 0)).toEqual([1])
   expect(iterableUpdate([1, 2, 3], 10, 1)).toEqual([1, 10, 3])
+})
+
+test('iterableUnique', () => {
+  expect(iterableUnique([])).toEqual([])
+  expect(iterableUnique([1, 2])).toEqual([1, 2])
+  expect(iterableUnique([1, 1, 2, 3, 2, 3])).toEqual([1, 2, 3])
+})
+
+test('iterableFlatten', () => {
+  expect(iterableFlatten([])).toEqual([])
+  expect(iterableFlatten([[]])).toEqual([])
+  expect(iterableFlatten([[1, 2, 3], [4, 5, 6]])).toEqual([1, 2, 3, 4, 5, 6])
+})
+
+test('iterableToUnnamed', () => {
+  expect(iterableToUnnamed([])).toEqual({})
+  expect(iterableToUnnamed([{ ['a']: 1 }])).toEqual({ ['a']: 1 })
+  expect(iterableToUnnamed([{ ['a']: 1 }, { ['b']: 2 }])).toEqual({
+    ['a']: 1,
+    ['b']: 2
+  })
 })
