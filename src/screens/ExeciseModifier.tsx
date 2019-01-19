@@ -7,6 +7,7 @@ import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
 import { addSet, deleteSet, modifySet } from '../model/Exercise'
+import { modifyExercise } from '../model/Workout'
 import { WorkoutStore } from '../stores/Workout'
 
 export type ExerciseModifierNavigationParams = {
@@ -35,24 +36,40 @@ export class ExerciseModifierScreen extends React.Component<
         {(store: WorkoutStore) => (
           <ExerciseModifierComponent
             onAddSet={set => {
-              store.modifyExercise(
-                selectedExercise,
-                addSet(store.state.exercises[selectedExercise], set)
+              store.modifyWorkout(
+                modifyExercise(
+                  store.state.workout,
+                  selectedExercise,
+                  addSet(store.state.workout.exercises[selectedExercise], set)
+                )
               )
             }}
             onModifySet={(index, set) => {
-              store.modifyExercise(
-                selectedExercise,
-                modifySet(store.state.exercises[selectedExercise], index, set)
+              store.modifyWorkout(
+                modifyExercise(
+                  store.state.workout,
+                  selectedExercise,
+                  modifySet(
+                    store.state.workout.exercises[selectedExercise],
+                    index,
+                    set
+                  )
+                )
               )
             }}
             onDeleteSet={index => {
-              store.modifyExercise(
-                selectedExercise,
-                deleteSet(store.state.exercises[selectedExercise], index)
+              store.modifyWorkout(
+                modifyExercise(
+                  store.state.workout,
+                  selectedExercise,
+                  deleteSet(
+                    store.state.workout.exercises[selectedExercise],
+                    index
+                  )
+                )
               )
             }}
-            sets={store.state.exercises[selectedExercise].sets}
+            sets={store.state.workout.exercises[selectedExercise].sets}
           />
         )}
       </Subscribe>

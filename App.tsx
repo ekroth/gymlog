@@ -8,22 +8,24 @@ import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
 import { WorkoutStore } from './src/stores/Workout'
 
 const testState = new WorkoutStore({
-  exercises: [
-    {
-      name: 'Squat',
-      sets: [
-        { weight: 120, reps: 50 },
-        { weight: 150, reps: 1 },
-        { weight: 177.5, reps: 0 }
-      ],
-      color: 'green'
-    },
-    {
-      name: 'Deadlift',
-      sets: [{ weight: 200, reps: 1 }],
-      color: 'blue'
-    }
-  ]
+  workout: {
+    exercises: [
+      {
+        name: 'Squat',
+        sets: [
+          { weight: 120, reps: 50 },
+          { weight: 150, reps: 1 },
+          { weight: 177.5, reps: 0 }
+        ],
+        color: 'green'
+      },
+      {
+        name: 'Deadlift',
+        sets: [{ weight: 200, reps: 1 }],
+        color: 'blue'
+      }
+    ]
+  }
 })
 
 const WorkoutNavigator = createAppContainer(
