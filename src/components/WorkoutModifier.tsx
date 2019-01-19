@@ -2,7 +2,7 @@ import { Col, Grid, View } from 'native-base'
 import React from 'react'
 import { FlatList, ListRenderItemInfo } from 'react-native'
 
-import Exercise from '../model/Exercise'
+import { Exercise } from '../model/Exercise'
 import { callback1 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { ExercisePreviewComponent } from './ExercisePreview'
