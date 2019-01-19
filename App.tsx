@@ -15,11 +15,13 @@ const testState = new WorkoutStore({
         { weight: 120, reps: 50 },
         { weight: 150, reps: 1 },
         { weight: 177.5, reps: 0 }
-      ]
+      ],
+      color: 'green'
     },
     {
       name: 'Deadlift',
-      sets: [{ weight: 200, reps: 1 }]
+      sets: [{ weight: 200, reps: 1 }],
+      color: 'blue'
     }
   ]
 })

@@ -20,7 +20,8 @@ export class WorkoutModifierScreen extends React.Component<
             onSelectExercise={index => {
               const params: ExerciseModifierNavigationParams = {
                 exerciseName: store.state.exercises[index].name,
-                selectedExercise: index
+                selectedExercise: index,
+                exerciseColor: store.state.exercises[index].color
               }
 
               this.props.navigation.navigate('ExerciseModifierScreen', params)

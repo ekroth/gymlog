@@ -13,6 +13,7 @@ export type ExerciseModifierNavigationParams = {
   // Convenience copy for React Navigation Header
   exerciseName: string
   selectedExercise: number
+  exerciseColor: string
 }
 
 export class ExerciseModifierScreen extends React.Component<
@@ -21,7 +22,8 @@ export class ExerciseModifierScreen extends React.Component<
   public static navigationOptions = (
     props: NavigationScreenProps<ExerciseModifierNavigationParams>
   ): NavigationScreenOptions => ({
-    title: props.navigation.state.params!.exerciseName
+    title: props.navigation.state.params!.exerciseName,
+    headerTintColor: props.navigation.state.params!.exerciseColor
   })
 
   public render() {

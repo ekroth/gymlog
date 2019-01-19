@@ -4,6 +4,7 @@ import Set from './Set'
 export default interface Exercise {
   readonly name: string
   readonly sets: ReadonlyArray<Set>
+  readonly color: string
 }
 
 export const addSet = (exercise: Exercise, set: Set): Exercise => ({

@@ -26,7 +26,7 @@ export class WorkoutStore extends Container<WorkoutState> {
   public addExercise = (name: string) =>
     this.setState(state => ({
       ...state,
-      exercises: [...state.exercises, { name, sets: [] }]
+      exercises: [...state.exercises, { name, sets: [], color: 'black' }]
     }))
 
   public modifyExercise = (index: number, exercise: Exercise) =>
