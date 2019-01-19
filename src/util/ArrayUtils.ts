@@ -1,7 +1,7 @@
 type AnArray<T> = T[] | ReadonlyArray<T>
 
 export const arrayFlatten = <T>(
-  arrays: AnArray<AnArray<T>>
+  arrays: AnArray<ConcatArray<T>>
 ): ReadonlyArray<T> => {
   const out: T[] = []
   return out.concat(...arrays)
@@ -9,15 +9,7 @@ export const arrayFlatten = <T>(
 
 export const arrayToUnnamed = <V>(
   array: AnArray<{ [_: string]: V }>
-): { [_: string]: V } => {
-  let out: { [_: string]: V } = {}
-
-  for (const o of array) {
-    out = { ...out, ...o }
-  }
-
-  return out
-}
+): { [_: string]: V } => array.reduce((o, v) => ({ ...o, ...v }), {})
 
 export const arrayInsert = <T>(
   array: AnArray<T>,
