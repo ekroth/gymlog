@@ -1,7 +1,7 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
-import Set from './Set'
+import { Set } from './Set'
 
-export default interface Exercise {
+export interface Exercise {
   readonly name: string
   readonly sets: ReadonlyArray<Set>
   readonly color: string

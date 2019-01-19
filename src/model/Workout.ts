@@ -1,7 +1,7 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
-import Exercise from './Exercise'
+import { Exercise } from './Exercise'
 
-export default interface Workout {
+export interface Workout {
   readonly date: Date
   readonly exercises: ReadonlyArray<Exercise>
 }
