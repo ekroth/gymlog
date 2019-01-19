@@ -20,6 +20,7 @@
     "jsx-no-bind": true,
     "prefer-array-literal": [true, { "allow-type-parameters": true }],
     "max-classes-per-file": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-boolean-literal-compare": false
   }
 }
