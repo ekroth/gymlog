@@ -8,6 +8,7 @@ import { Subscribe } from 'unstated'
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
 import { WorkoutStore } from '../stores/Workout'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
+import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 
 export type WorkoutModifierNavigationParams = {
   // Convenience copy for React Navigation Header
@@ -34,7 +35,12 @@ export class WorkoutModifierScreen extends React.Component<
 
           return (
             <WorkoutModifierComponent
-              onAddExercise={workout.addExercise}
+              onAddExercise={() => {
+                const params: ExerciseSelectorNavigationParams = {
+                  selectedWorkout
+                }
+                this.props.navigation.navigate('ExerciseSelectorScreen', params)
+              }}
               onModifyExercise={workout.modifyExercise}
               onDeleteExercise={workout.deleteExercise}
               onSelectExercise={index => {

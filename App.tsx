@@ -5,8 +5,14 @@ import { Provider } from 'unstated'
 
 import { DayModifierScreen } from './src/screens/DayModifier'
 import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
+import { ExerciseSelectorScreen } from './src/screens/ExerciseSelector'
 import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
+import { ExerciseCatalogStore } from './src/stores/ExerciseCatalog'
 import { WorkoutStore } from './src/stores/Workout'
+
+const testExerciseCatalogState = new ExerciseCatalogStore({
+  exercises: ['Squat', 'Deadlift', 'Curls']
+})
 
 const testState = new WorkoutStore({
   workouts: [
@@ -50,6 +56,9 @@ const testState = new WorkoutStore({
 const WorkoutNavigator = createAppContainer(
   createStackNavigator(
     {
+      ExerciseSelectorScreen: {
+        screen: ExerciseSelectorScreen
+      },
       ExerciseModifierScreen: {
         screen: ExerciseModifierScreen
       },
@@ -73,7 +82,7 @@ const WorkoutNavigator = createAppContainer(
 export default class App extends PureComponent {
   public render() {
     return (
-      <Provider inject={[testState]}>
+      <Provider inject={[testState, testExerciseCatalogState]}>
         <Container>
           <Header>
             <Text style={{ alignSelf: 'center' }}>Workouts</Text>
