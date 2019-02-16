@@ -1,6 +1,6 @@
 import { Col, Grid, Row, Text, View } from 'native-base'
 import React from 'react'
-import { FlatList, ListRenderItemInfo } from 'react-native'
+import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
 import { Day } from '../model/Day'
 import { Workout } from '../model/Workout'
@@ -9,6 +9,7 @@ import { keyExtractorIndex } from '../util/FlatListUtils'
 import { WorkoutModifierComponent } from './WorkoutModifier'
 
 export type DayModifierProps = {
+  onAddWorkout?: () => void
   onSelectWorkout?: (index: number) => void
   day: Day
 }
@@ -17,16 +18,27 @@ export const DayModifierComponent = (props: DayModifierProps) => {
   return (
     <Grid style={{ alignItems: 'center' }}>
       <Col>
-        <FlatList<Workout>
-          ItemSeparatorComponent={itemSeparator}
-          data={props.day.workouts}
-          keyExtractor={keyExtractorIndex}
-          renderItem={info =>
-            createExercisePreviewItem(info, () => {
-              callback1(props.onSelectWorkout)(info.index)
-            })
-          }
-        />
+        {(props.onAddWorkout && (
+          <Row size={0.1} style={{ alignItems: 'center' }}>
+            <Button
+              title={'Add Workout'}
+              onPress={() => props.onAddWorkout!()}
+            />
+          </Row>
+        )) ||
+          null}
+        <Row>
+          <FlatList<Workout>
+            ItemSeparatorComponent={itemSeparator}
+            data={props.day.workouts}
+            keyExtractor={keyExtractorIndex}
+            renderItem={info =>
+              createExercisePreviewItem(info, () => {
+                callback1(props.onSelectWorkout)(info.index)
+              })
+            }
+          />
+        </Row>
       </Col>
     </Grid>
   )

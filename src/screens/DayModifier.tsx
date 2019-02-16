@@ -29,6 +29,7 @@ export class DayModifierScreen extends React.Component<
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => (
           <DayModifierComponent
+            onAddWorkout={undefined} // TODO: must supply time?
             day={store.getDay(date)}
             onSelectWorkout={index => {
               const workout = store.state.workouts[index]
