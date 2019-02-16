@@ -1,4 +1,3 @@
-import { Alert } from 'react-native'
 import { Container } from 'unstated'
 
 import { Day } from '../model/Day'
@@ -10,10 +9,11 @@ import {
   modifyExercise,
   Workout
 } from '../model/Workout'
-import { arrayUnique, arrayUpdate } from '../util/ArrayUtils'
-import { dateDayString, dateSameDay, dateTimeString } from '../util/DateUtils'
+import { arrayUnique, arrayUpdateWhere } from '../util/ArrayUtils'
+import { dateDayString, dateSameDay } from '../util/DateUtils'
 
 export type WorkoutState = {
+  nextId: number
   workouts: ReadonlyArray<Workout>
 }
 
@@ -52,11 +52,11 @@ export class ExerciseHandler {
 
 export class WorkoutHandler {
   private store: WorkoutStore
-  private index: number
+  private id: number
 
-  constructor(store: WorkoutStore, index: number) {
+  constructor(store: WorkoutStore, id: number) {
     this.store = store
-    this.index = index
+    this.id = id
   }
 
   public exerciseHandler = (index: number) => {
@@ -64,24 +64,21 @@ export class WorkoutHandler {
   }
 
   public getWorkout = () => {
-    return this.store.state.workouts[this.index]
+    return this.store.state.workouts.filter(w => w.id === this.id)[0]
   }
 
   public addExercise = (name: string) => {
-    this.store.modifyWorkout(addExercise(this.getWorkout(), name), this.index)
+    this.store.modifyWorkout(addExercise(this.getWorkout(), name), this.id)
   }
 
   public deleteExercise = (index: number) => {
-    this.store.modifyWorkout(
-      deleteExercise(this.getWorkout(), index),
-      this.index
-    )
+    this.store.modifyWorkout(deleteExercise(this.getWorkout(), index), this.id)
   }
 
   public modifyExercise = (index: number, exercise: Exercise) => {
     this.store.modifyWorkout(
       modifyExercise(this.getWorkout(), index, exercise),
-      this.index
+      this.id
     )
   }
 
@@ -97,11 +94,14 @@ export class WorkoutStore extends Container<WorkoutState> {
     }
   ) {
     super()
-    this.state = props
+    this.state = {
+      nextId: props.workouts.length,
+      workouts: props.workouts
+    }
   }
 
-  public workoutHandler = (index: number) => {
-    return new WorkoutHandler(this, index)
+  public workoutHandler = (id: number) => {
+    return new WorkoutHandler(this, id)
   }
 
   public getDay = (date: Date): Day => ({
@@ -117,12 +117,13 @@ export class WorkoutStore extends Container<WorkoutState> {
   public addWorkout = (workout: Workout) =>
     this.setState(state => ({
       ...state,
-      workouts: [...state.workouts, workout]
+      nextId: state.nextId + 1,
+      workouts: [...state.workouts, { ...workout, id: state.nextId }]
     }))
 
-  public modifyWorkout = (workout: Workout, index: number) =>
+  public modifyWorkout = (workout: Workout, id: number) =>
     this.setState(state => ({
       ...state,
-      workouts: arrayUpdate(state.workouts, workout, index)
+      workouts: arrayUpdateWhere(state.workouts, workout, w => w.id === id)
     }))
 }

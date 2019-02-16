@@ -8,7 +8,6 @@ import { Subscribe } from 'unstated'
 import { WorkoutCalendarComponent } from '../components/WorkoutCalendar'
 import { WorkoutStore } from '../stores/Workout'
 import { DayModifierNavigationParams } from './DayModifier'
-import { WorkoutModifierNavigationParams } from './WorkoutModifier'
 
 export type WorkoutCalendarNavigationParams = {}
 
@@ -26,9 +25,9 @@ export class WorkoutCalendarScreen extends React.Component<
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => (
           <WorkoutCalendarComponent
-            onAddWorkout={() => {
-              const date = new Date(new Date().toISOString())
-              store.addWorkout({
+            onAddWorkout={async () => {
+              const date = new Date()
+              await store.addWorkout({
                 date,
                 exercises: [
                   {

@@ -6,6 +6,7 @@ import {
 import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
+import { Workout } from '../model/Workout'
 import { WorkoutStore } from '../stores/Workout'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
@@ -13,7 +14,7 @@ import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 export type WorkoutModifierNavigationParams = {
   // Convenience copy for React Navigation Header
   date: Date
-  selectedWorkout: number
+  selectedWorkout: Workout
 }
 
 export class WorkoutModifierScreen extends React.Component<
@@ -31,13 +32,12 @@ export class WorkoutModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => {
-          const workout = store.workoutHandler(selectedWorkout)
+          const workout = store.workoutHandler(selectedWorkout.id!)
 
           return (
             <WorkoutModifierComponent
               onAddExercise={() => {
                 const params: ExerciseSelectorNavigationParams = {
-                  selectedWorkout,
                   onSelectExercise: async exercise => {
                     await workout.addExercise(exercise)
 

@@ -11,7 +11,6 @@ import { callback1 } from '../util/Callbacks'
 
 export type ExerciseSelectorNavigationParams = {
   onSelectExercise?: (exercise: string) => void
-  selectedWorkout: number
 }
 
 export class ExerciseSelectorScreen extends React.Component<

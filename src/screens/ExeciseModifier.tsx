@@ -6,13 +6,14 @@ import {
 import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
+import { Workout } from '../model/Workout'
 import { WorkoutStore } from '../stores/Workout'
 
 export type ExerciseModifierNavigationParams = {
   // Convenience copy for React Navigation Header
   exerciseName: string
   selectedExercise: number
-  selectedWorkout: number
+  selectedWorkout: Workout
   exerciseColor: string
 }
 
@@ -34,7 +35,7 @@ export class ExerciseModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutStore]}>
         {(store: WorkoutStore) => {
-          const workout = store.workoutHandler(selectedWorkout)
+          const workout = store.workoutHandler(selectedWorkout.id!)
           const exercise = workout.exerciseHandler(selectedExercise)
 
           return (

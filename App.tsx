@@ -3,9 +3,11 @@ import React, { PureComponent } from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import { Provider } from 'unstated'
 
+import { WorkoutCalendarComponent } from './src/components/WorkoutCalendar'
 import { DayModifierScreen } from './src/screens/DayModifier'
 import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
 import { ExerciseSelectorScreen } from './src/screens/ExerciseSelector'
+import { WorkoutCalendarScreen } from './src/screens/WorkoutCalendar'
 import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
 import { ExerciseCatalogStore } from './src/stores/ExerciseCatalog'
 import { WorkoutStore } from './src/stores/Workout'
@@ -17,6 +19,7 @@ const testExerciseCatalogState = new ExerciseCatalogStore({
 const testState = new WorkoutStore({
   workouts: [
     {
+      id: 0,
       date: new Date('2019-01-24T09:00:00'),
       exercises: [
         {
@@ -36,6 +39,7 @@ const testState = new WorkoutStore({
       ]
     },
     {
+      id: 1,
       date: new Date('2019-01-24T18:00:00'),
       exercises: [
         {
@@ -67,13 +71,14 @@ const WorkoutNavigator = createAppContainer(
       },
       DayModifierScreen: {
         screen: DayModifierScreen
+      },
+      WorkoutCalendarScreen: {
+        screen: WorkoutCalendarScreen
       }
     },
     {
-      initialRouteName: 'DayModifierScreen',
-      initialRouteParams: {
-        date: new Date('2019-01-24')
-      }
+      initialRouteName: 'WorkoutCalendarScreen',
+      initialRouteParams: {}
     }
   )
 )

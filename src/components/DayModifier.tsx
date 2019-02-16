@@ -10,7 +10,7 @@ import { WorkoutModifierComponent } from './WorkoutModifier'
 
 export type DayModifierProps = {
   onAddWorkout?: () => void
-  onSelectWorkout?: (index: number) => void
+  onSelectWorkout?: (workout: Workout) => void
   day: Day
 }
 
@@ -34,7 +34,7 @@ export const DayModifierComponent = (props: DayModifierProps) => {
             keyExtractor={keyExtractorIndex}
             renderItem={info =>
               createExercisePreviewItem(info, () => {
-                callback1(props.onSelectWorkout)(info.index)
+                callback1(props.onSelectWorkout)(props.day.workouts[info.index])
               })
             }
           />

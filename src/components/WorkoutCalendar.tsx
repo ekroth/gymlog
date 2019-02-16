@@ -1,6 +1,6 @@
 import { Grid, Row } from 'native-base'
 import React from 'react'
-import { Alert, Button } from 'react-native'
+import { Button } from 'react-native'
 import { Calendar, DateCallbackHandler } from 'react-native-calendars'
 
 import { Day } from '../model/Day'

@@ -36,5 +36,11 @@ export const arrayUpdate = <T>(
   ...array.slice(index + 1)
 ]
 
+export const arrayUpdateWhere = <T>(
+  array: AnArray<T>,
+  item: T,
+  predicate: (item: T) => boolean
+): ReadonlyArray<T> => arrayUpdate(array, item, array.findIndex(predicate))
+
 export const arrayUnique = <T>(array: AnArray<T>): ReadonlyArray<T> =>
   array.filter((v, i, a) => a.indexOf(v) === i)
