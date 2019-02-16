@@ -1,3 +1,4 @@
+import { Alert } from 'react-native'
 import { Container } from 'unstated'
 
 import { Day } from '../model/Day'
@@ -9,8 +10,8 @@ import {
   modifyExercise,
   Workout
 } from '../model/Workout'
-import { arrayUpdate } from '../util/ArrayUtils'
-import { dateSameDay, dateTimeString } from '../util/DateUtils'
+import { arrayUnique, arrayUpdate } from '../util/ArrayUtils'
+import { dateDayString, dateSameDay, dateTimeString } from '../util/DateUtils'
 
 export type WorkoutState = {
   workouts: ReadonlyArray<Workout>
@@ -104,9 +105,14 @@ export class WorkoutStore extends Container<WorkoutState> {
   }
 
   public getDay = (date: Date): Day => ({
-    date: new Date(dateTimeString(date)),
+    date: new Date(dateDayString(date)),
     workouts: this.state.workouts.filter(w => dateSameDay(w.date, date))
   })
+
+  public getDays = (): ReadonlyArray<Day> => {
+    const dates = arrayUnique(this.state.workouts.map(w => w.date))
+    return dates.map(this.getDay)
+  }
 
   public addWorkout = (workout: Workout) =>
     this.setState(state => ({
