@@ -37,7 +37,23 @@ export class WorkoutModifierScreen extends React.Component<
             <WorkoutModifierComponent
               onAddExercise={() => {
                 const params: ExerciseSelectorNavigationParams = {
-                  selectedWorkout
+                  selectedWorkout,
+                  onSelectExercise: async exercise => {
+                    await workout.addExercise(exercise)
+
+                    const index = workout.getWorkout().exercises.length - 1
+                    const paramsModifier: ExerciseModifierNavigationParams = {
+                      selectedWorkout,
+                      exerciseName: workout.getExercise(index).name,
+                      selectedExercise: index,
+                      exerciseColor: workout.getExercise(index).color
+                    }
+
+                    this.props.navigation.navigate(
+                      'ExerciseModifierScreen',
+                      paramsModifier
+                    )
+                  }
                 }
                 this.props.navigation.navigate('ExerciseSelectorScreen', params)
               }}
