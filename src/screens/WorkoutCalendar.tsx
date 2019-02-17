@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 import {
   NavigationScreenOptions,
@@ -26,21 +27,21 @@ export class WorkoutCalendarScreen extends React.Component<
         {(store: WorkoutStore) => (
           <WorkoutCalendarComponent
             onAddWorkout={async () => {
-              const date = new Date()
+              const timestamp = new Date().getTime()
               await store.addWorkout({
-                timestamp: date.getTime(),
+                timestamp,
                 exercises: []
               })
 
               const params: DayModifierNavigationParams = {
-                date
+                date: moment(timestamp).format('YYYY-MM-DD')
               }
 
               this.props.navigation.navigate('DayModifierScreen', params)
             }}
             onSelectDay={date => {
               const params: DayModifierNavigationParams = {
-                date: new Date(date.dateString)
+                date: date.dateString
               }
 
               this.props.navigation.navigate('DayModifierScreen', params)

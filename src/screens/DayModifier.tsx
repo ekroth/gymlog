@@ -10,7 +10,7 @@ import { WorkoutStore } from '../stores/Workout'
 import { WorkoutModifierNavigationParams } from './WorkoutModifier'
 
 export type DayModifierNavigationParams = {
-  date: Date
+  date: string
 }
 
 export class DayModifierScreen extends React.Component<
@@ -19,7 +19,7 @@ export class DayModifierScreen extends React.Component<
   public static navigationOptions = (
     props: NavigationScreenProps<DayModifierNavigationParams>
   ): NavigationScreenOptions => ({
-    title: props.navigation.state.params!.date.toLocaleDateString()
+    title: props.navigation.state.params!.date
   })
 
   public render() {
@@ -33,7 +33,6 @@ export class DayModifierScreen extends React.Component<
             day={store.getDay(date)}
             onSelectWorkout={workout => {
               const params: WorkoutModifierNavigationParams = {
-                date: new Date(workout.timestamp),
                 selectedWorkout: workout
               }
 

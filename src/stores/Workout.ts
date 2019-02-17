@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Container } from 'unstated'
 
 import { Day } from '../model/Day'
@@ -10,7 +11,6 @@ import {
   Workout
 } from '../model/Workout'
 import { arrayUnique, arrayUpdateWhere } from '../util/ArrayUtils'
-import { dateDayString, dateSameDay } from '../util/DateUtils'
 
 export type WorkoutState = {
   nextId: number
@@ -104,16 +104,16 @@ export class WorkoutStore extends Container<WorkoutState> {
     return new WorkoutHandler(this, id)
   }
 
-  public getDay = (date: Date): Day => ({
-    date: new Date(dateDayString(date)),
-    workouts: this.state.workouts.filter(w =>
-      dateSameDay(new Date(w.timestamp), date)
+  public getDay = (date: string): Day => ({
+    date,
+    workouts: this.state.workouts.filter(
+      w => moment(w.timestamp).format('YYYY-MM-DD') === date
     )
   })
 
   public getDays = (): ReadonlyArray<Day> => {
     const dates = arrayUnique(
-      this.state.workouts.map(w => new Date(w.timestamp))
+      this.state.workouts.map(w => moment(w.timestamp).format('YYYY-MM-DD'))
     )
     return dates.map(this.getDay)
   }

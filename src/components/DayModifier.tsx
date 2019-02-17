@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Col, Grid, Row, Text, View } from 'native-base'
 import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
@@ -53,7 +54,7 @@ const createExercisePreviewItem = (
   <Grid style={{ alignItems: 'center' }}>
     <Row>
       <Text onPress={onPress}>
-        {new Date(info.item.timestamp).toLocaleTimeString()}
+        {moment(info.item.timestamp).format('hh:mm:ss')}
       </Text>
     </Row>
     <Row>

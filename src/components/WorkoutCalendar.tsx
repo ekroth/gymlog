@@ -14,12 +14,11 @@ export type WorkoutCalendarProps = {
 
 export const WorkoutCalendarComponent = (props: WorkoutCalendarProps) => {
   const dateEntries = props.days.map(day => {
-    const dateString = day.date.toISOString().split('T')[0]
     const exercises = arrayFlatten(day.workouts.map(w => w.exercises))
     const exerciseColors = arrayUnique(exercises.map(e => e.color))
 
     return {
-      [dateString]: {
+      [day.date]: {
         dots: exerciseColors.map((c, i) => ({
           key: `${i}`,
           color: c

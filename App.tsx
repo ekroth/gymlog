@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Container, Header, Text } from 'native-base'
 import React, { PureComponent } from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'

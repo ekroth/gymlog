@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 import {
   NavigationScreenOptions,
@@ -12,8 +13,6 @@ import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 
 export type WorkoutModifierNavigationParams = {
-  // Convenience copy for React Navigation Header
-  date: Date
   selectedWorkout: Workout
 }
 
@@ -23,7 +22,9 @@ export class WorkoutModifierScreen extends React.Component<
   public static navigationOptions = (
     props: NavigationScreenProps<WorkoutModifierNavigationParams>
   ): NavigationScreenOptions => ({
-    title: props.navigation.state.params!.date.toLocaleString()
+    title: moment(
+      props.navigation.state.params!.selectedWorkout.timestamp
+    ).format('YYYY-MM-DD')
   })
 
   public render() {
