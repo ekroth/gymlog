@@ -24,7 +24,7 @@ export class WorkoutModifierScreen extends React.Component<
   ): NavigationScreenOptions => ({
     title: moment(
       props.navigation.state.params!.selectedWorkout.timestamp
-    ).format('YYYY-MM-DD')
+    ).format('hh:mm:ss')
   })
 
   public render() {
