@@ -2,17 +2,17 @@ import { Grid, Row, View } from 'native-base'
 import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
-import { Exercise } from '../model/Exercise'
+import { ExerciseEntry } from '../model/ExerciseEntry'
 import { callback1 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { ExercisePreviewComponent } from './ExercisePreview'
 
 export type WorkoutModifierProps = {
   onAddExercise?: () => void
-  onModifyExercise?: (index: number, exercise: Exercise) => void
+  onModifyExercise?: (index: number, exercise: ExerciseEntry) => void
   onDeleteExercise?: (index: number) => void
   onSelectExercise?: (index: number) => void
-  exercises: ReadonlyArray<Exercise>
+  exercises: ReadonlyArray<ExerciseEntry>
 }
 
 export const WorkoutModifierComponent = (props: WorkoutModifierProps) => {
@@ -32,7 +32,7 @@ export const WorkoutModifierComponent = (props: WorkoutModifierProps) => {
           flexDirection: 'column'
         }}
       >
-        <FlatList<Exercise>
+        <FlatList<ExerciseEntry>
           ItemSeparatorComponent={itemSeparator}
           data={props.exercises}
           keyExtractor={keyExtractorIndex}
@@ -50,6 +50,6 @@ export const WorkoutModifierComponent = (props: WorkoutModifierProps) => {
 const itemSeparator = () => <View style={{ height: 10 }} />
 
 const createExercisePreviewItem = (
-  info: ListRenderItemInfo<Exercise>,
+  info: ListRenderItemInfo<ExerciseEntry>,
   onPress: () => void
 ) => <ExercisePreviewComponent exercise={info.item} onPress={onPress} />

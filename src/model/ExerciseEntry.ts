@@ -1,27 +1,30 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
 import { Set } from './Set'
 
-export interface Exercise {
+export interface ExerciseEntry {
   readonly name: string
   readonly sets: ReadonlyArray<Set>
   readonly color: string
 }
 
-export const addSet = (exercise: Exercise, set: Set): Exercise => ({
+export const addSet = (exercise: ExerciseEntry, set: Set): ExerciseEntry => ({
   ...exercise,
   sets: [...exercise.sets, set]
 })
 
 export const modifySet = (
-  exercise: Exercise,
+  exercise: ExerciseEntry,
   index: number,
   set: Set
-): Exercise => ({
+): ExerciseEntry => ({
   ...exercise,
   sets: arrayUpdate(exercise.sets, set, index)
 })
 
-export const deleteSet = (exercise: Exercise, index: number): Exercise => ({
+export const deleteSet = (
+  exercise: ExerciseEntry,
+  index: number
+): ExerciseEntry => ({
   ...exercise,
   sets: arrayRemove(exercise.sets, index)
 })

@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import { Provider } from 'unstated'
 
-import { WorkoutCalendarComponent } from './src/components/WorkoutCalendar'
 import { DayModifierScreen } from './src/screens/DayModifier'
 import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
 import { ExerciseSelectorScreen } from './src/screens/ExerciseSelector'

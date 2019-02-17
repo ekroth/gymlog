@@ -1,10 +1,10 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
-import { Exercise } from './Exercise'
+import { ExerciseEntry } from './ExerciseEntry'
 
 export interface Workout {
   readonly id?: number
   readonly timestamp: number
-  readonly exercises: ReadonlyArray<Exercise>
+  readonly exercises: ReadonlyArray<ExerciseEntry>
 }
 
 export const addExercise = (workout: Workout, name: string) => ({
@@ -15,7 +15,7 @@ export const addExercise = (workout: Workout, name: string) => ({
 export const modifyExercise = (
   workout: Workout,
   index: number,
-  exercise: Exercise
+  exercise: ExerciseEntry
 ) => ({
   ...workout,
   exercises: arrayUpdate(workout.exercises, exercise, index)

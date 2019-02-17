@@ -2,7 +2,7 @@ import { Grid, Row, Text } from 'native-base'
 import React from 'react'
 import { FlatList, ListRenderItemInfo, TouchableOpacity } from 'react-native'
 
-import { Exercise } from '../model/Exercise'
+import { ExerciseEntry } from '../model/ExerciseEntry'
 import { Set } from '../model/Set'
 import { callback0 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
@@ -10,7 +10,7 @@ import { SetItemComponent } from './SetItem'
 
 export type ExercisePreviewProps = {
   onPress?: () => void
-  exercise: Exercise
+  exercise: ExerciseEntry
 }
 
 export const ExercisePreviewComponent = (props: ExercisePreviewProps) => (

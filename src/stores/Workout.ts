@@ -2,7 +2,12 @@ import moment from 'moment'
 import { Container } from 'unstated'
 
 import { Day } from '../model/Day'
-import { addSet, deleteSet, Exercise, modifySet } from '../model/Exercise'
+import {
+  addSet,
+  deleteSet,
+  ExerciseEntry,
+  modifySet
+} from '../model/ExerciseEntry'
 import { Set } from '../model/Set'
 import {
   addExercise,
@@ -75,7 +80,7 @@ export class WorkoutHandler {
     this.store.modifyWorkout(deleteExercise(this.getWorkout(), index), this.id)
   }
 
-  public modifyExercise = (index: number, exercise: Exercise) => {
+  public modifyExercise = (index: number, exercise: ExerciseEntry) => {
     this.store.modifyWorkout(
       modifyExercise(this.getWorkout(), index, exercise),
       this.id
