@@ -13,17 +13,17 @@ import {
   addExercise,
   deleteExercise,
   modifyExercise,
-  Workout
-} from '../model/Workout'
+  WorkoutEntry
+} from '../model/WorkoutEntry'
 import { arrayUnique, arrayUpdateWhere } from '../util/ArrayUtils'
 
 export type WorkoutState = {
   nextId: number
-  workouts: ReadonlyArray<Workout>
+  workouts: ReadonlyArray<WorkoutEntry>
 }
 
 export type WorkoutProps = {
-  workouts: ReadonlyArray<Workout>
+  workouts: ReadonlyArray<WorkoutEntry>
 }
 
 export class ExerciseHandler {
@@ -123,14 +123,14 @@ export class WorkoutStore extends Container<WorkoutState> {
     return dates.map(this.getDay)
   }
 
-  public addWorkout = (workout: Workout) =>
+  public addWorkout = (workout: WorkoutEntry) =>
     this.setState(state => ({
       ...state,
       nextId: state.nextId + 1,
       workouts: [...state.workouts, { ...workout, id: state.nextId }]
     }))
 
-  public modifyWorkout = (workout: Workout, id: number) =>
+  public modifyWorkout = (workout: WorkoutEntry, id: number) =>
     this.setState(state => ({
       ...state,
       workouts: arrayUpdateWhere(state.workouts, workout, w => w.id === id)

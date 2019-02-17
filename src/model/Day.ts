@@ -1,6 +1,6 @@
-import { Workout } from './Workout'
+import { WorkoutEntry } from './WorkoutEntry'
 
 export interface Day {
   readonly date: string
-  readonly workouts: ReadonlyArray<Workout>
+  readonly workouts: ReadonlyArray<WorkoutEntry>
 }

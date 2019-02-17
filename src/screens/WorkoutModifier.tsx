@@ -7,13 +7,13 @@ import {
 import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
-import { Workout } from '../model/Workout'
+import { WorkoutEntry } from '../model/WorkoutEntry'
 import { WorkoutStore } from '../stores/Workout'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 
 export type WorkoutModifierNavigationParams = {
-  selectedWorkout: Workout
+  selectedWorkout: WorkoutEntry
 }
 
 export class WorkoutModifierScreen extends React.Component<

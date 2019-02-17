@@ -6,14 +6,14 @@ import {
 import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
-import { Workout } from '../model/Workout'
+import { WorkoutEntry } from '../model/WorkoutEntry'
 import { WorkoutStore } from '../stores/Workout'
 
 export type ExerciseModifierNavigationParams = {
   // Convenience copy for React Navigation Header
   exerciseName: string
   selectedExercise: number
-  selectedWorkout: Workout
+  selectedWorkout: WorkoutEntry
   exerciseColor: string
 }
 

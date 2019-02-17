@@ -4,14 +4,14 @@ import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
 import { Day } from '../model/Day'
-import { Workout } from '../model/Workout'
+import { WorkoutEntry } from '../model/WorkoutEntry'
 import { callback1 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
 import { WorkoutModifierComponent } from './WorkoutModifier'
 
 export type DayModifierProps = {
   onAddWorkout?: () => void
-  onSelectWorkout?: (workout: Workout) => void
+  onSelectWorkout?: (workout: WorkoutEntry) => void
   day: Day
 }
 
@@ -29,7 +29,7 @@ export const DayModifierComponent = (props: DayModifierProps) => {
         )) ||
           null}
         <Row>
-          <FlatList<Workout>
+          <FlatList<WorkoutEntry>
             ItemSeparatorComponent={itemSeparator}
             data={props.day.workouts}
             keyExtractor={keyExtractorIndex}
@@ -48,7 +48,7 @@ export const DayModifierComponent = (props: DayModifierProps) => {
 const itemSeparator = () => <View style={{ height: 40 }} />
 
 const createExercisePreviewItem = (
-  info: ListRenderItemInfo<Workout>,
+  info: ListRenderItemInfo<WorkoutEntry>,
   onPress: () => void
 ) => (
   <Grid style={{ alignItems: 'center' }}>
