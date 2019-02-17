@@ -2,7 +2,7 @@ import { Exercise } from 'model/Exercise'
 import moment from 'moment'
 import { Container } from 'unstated'
 
-import { Day } from '../model/Day'
+import { DayEntry } from '../model/DayEntry'
 import {
   addSet,
   deleteSet,
@@ -110,14 +110,14 @@ export class WorkoutStore extends Container<WorkoutState> {
     return new WorkoutHandler(this, id)
   }
 
-  public getDay = (date: string): Day => ({
+  public getDay = (date: string): DayEntry => ({
     date,
     workouts: this.state.workouts.filter(
       w => moment(w.timestamp).format('YYYY-MM-DD') === date
     )
   })
 
-  public getDays = (): ReadonlyArray<Day> => {
+  public getDays = (): ReadonlyArray<DayEntry> => {
     const dates = arrayUnique(
       this.state.workouts.map(w => moment(w.timestamp).format('YYYY-MM-DD'))
     )

@@ -1,6 +1,6 @@
 import { WorkoutEntry } from './WorkoutEntry'
 
-export interface Day {
+export interface DayEntry {
   readonly date: string
   readonly workouts: ReadonlyArray<WorkoutEntry>
 }

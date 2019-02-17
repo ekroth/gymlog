@@ -3,13 +3,13 @@ import React from 'react'
 import { Button } from 'react-native'
 import { Calendar, DateCallbackHandler } from 'react-native-calendars'
 
-import { Day } from '../model/Day'
+import { DayEntry } from '../model/DayEntry'
 import { arrayFlatten, arrayToUnnamed, arrayUnique } from '../util/ArrayUtils'
 
 export type WorkoutCalendarProps = {
   onAddWorkout?: () => void
   onSelectDay?: DateCallbackHandler
-  days: ReadonlyArray<Day>
+  days: ReadonlyArray<DayEntry>
 }
 
 export const WorkoutCalendarComponent = (props: WorkoutCalendarProps) => {

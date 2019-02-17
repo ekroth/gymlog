@@ -3,7 +3,7 @@ import { Col, Grid, Row, Text, View } from 'native-base'
 import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
-import { Day } from '../model/Day'
+import { DayEntry } from '../model/DayEntry'
 import { WorkoutEntry } from '../model/WorkoutEntry'
 import { callback1 } from '../util/Callbacks'
 import { keyExtractorIndex } from '../util/FlatListUtils'
@@ -12,7 +12,7 @@ import { WorkoutModifierComponent } from './WorkoutModifier'
 export type DayModifierProps = {
   onAddWorkout?: () => void
   onSelectWorkout?: (workout: WorkoutEntry) => void
-  day: Day
+  day: DayEntry
 }
 
 export const DayModifierComponent = (props: DayModifierProps) => {
