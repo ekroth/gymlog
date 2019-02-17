@@ -30,7 +30,7 @@ export class DayModifierScreen extends React.Component<
         {(store: WorkoutEntriesStore) => (
           <DayModifierComponent
             onAddWorkout={undefined} // TODO: must supply time?
-            day={store.getDay(date)}
+            day={store.getDayEntry(date)}
             onSelectWorkout={workout => {
               const params: WorkoutModifierNavigationParams = {
                 selectedWorkout: workout

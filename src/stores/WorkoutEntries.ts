@@ -37,22 +37,25 @@ export class ExerciseEntryHandler {
   }
 
   public addSet = (set: Set) => {
-    this.store.modifyExercise(this.index, addSet(this.getExercise(), set))
+    this.store.modifyExerciseEntry(this.index, addSet(this.getExercise(), set))
   }
 
   public deleteSet = (index: number) => {
-    this.store.modifyExercise(this.index, deleteSet(this.getExercise(), index))
+    this.store.modifyExerciseEntry(
+      this.index,
+      deleteSet(this.getExercise(), index)
+    )
   }
 
   public modifySet = (index: number, set: Set) => {
-    this.store.modifyExercise(
+    this.store.modifyExerciseEntry(
       this.index,
       modifySet(this.getExercise(), index, set)
     )
   }
 
   public getExercise = () => {
-    return this.store.getExercise(this.index)
+    return this.store.getExerciseEntry(this.index)
   }
 }
 
@@ -65,31 +68,37 @@ export class WorkoutEntryHandler {
     this.id = id
   }
 
-  public exerciseHandler = (index: number) => {
+  public exerciseEntryHandler = (index: number) => {
     return new ExerciseEntryHandler(this, index)
   }
 
-  public getWorkout = () => {
+  public getWorkoutEntry = () => {
     return this.store.state.workouts.filter(w => w.id === this.id)[0]
   }
 
   public addExercise = (exercise: Exercise) => {
-    this.store.modifyWorkout(addExercise(this.getWorkout(), exercise), this.id)
-  }
-
-  public deleteExercise = (index: number) => {
-    this.store.modifyWorkout(deleteExercise(this.getWorkout(), index), this.id)
-  }
-
-  public modifyExercise = (index: number, exercise: ExerciseEntry) => {
-    this.store.modifyWorkout(
-      modifyExercise(this.getWorkout(), index, exercise),
+    this.store.modifyWorkoutEntry(
+      addExercise(this.getWorkoutEntry(), exercise),
       this.id
     )
   }
 
-  public getExercise = (index: number) => {
-    return this.getWorkout().exercises[index]
+  public deleteExerciseEntry = (index: number) => {
+    this.store.modifyWorkoutEntry(
+      deleteExercise(this.getWorkoutEntry(), index),
+      this.id
+    )
+  }
+
+  public modifyExerciseEntry = (index: number, exercise: ExerciseEntry) => {
+    this.store.modifyWorkoutEntry(
+      modifyExercise(this.getWorkoutEntry(), index, exercise),
+      this.id
+    )
+  }
+
+  public getExerciseEntry = (index: number) => {
+    return this.getWorkoutEntry().exercises[index]
   }
 }
 
@@ -106,32 +115,32 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
     }
   }
 
-  public workoutHandler = (id: number) => {
+  public workoutEntryHandler = (id: number) => {
     return new WorkoutEntryHandler(this, id)
   }
 
-  public getDay = (date: string): DayEntry => ({
+  public getDayEntry = (date: string): DayEntry => ({
     date,
     workouts: this.state.workouts.filter(
       w => moment(w.timestamp).format('YYYY-MM-DD') === date
     )
   })
 
-  public getDays = (): ReadonlyArray<DayEntry> => {
+  public getDayEntries = (): ReadonlyArray<DayEntry> => {
     const dates = arrayUnique(
       this.state.workouts.map(w => moment(w.timestamp).format('YYYY-MM-DD'))
     )
-    return dates.map(this.getDay)
+    return dates.map(this.getDayEntry)
   }
 
-  public addWorkout = (workout: WorkoutEntry) =>
+  public addWorkoutEntry = (workout: WorkoutEntry) =>
     this.setState(state => ({
       ...state,
       nextId: state.nextId + 1,
       workouts: [...state.workouts, { ...workout, id: state.nextId }]
     }))
 
-  public modifyWorkout = (workout: WorkoutEntry, id: number) =>
+  public modifyWorkoutEntry = (workout: WorkoutEntry, id: number) =>
     this.setState(state => ({
       ...state,
       workouts: arrayUpdateWhere(state.workouts, workout, w => w.id === id)

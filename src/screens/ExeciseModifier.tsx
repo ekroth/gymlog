@@ -34,8 +34,8 @@ export class ExerciseModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutEntriesStore]}>
         {(store: WorkoutEntriesStore) => {
-          const workout = store.workoutHandler(selectedWorkout.id!)
-          const exercise = workout.exerciseHandler(selectedExercise)
+          const workout = store.workoutEntryHandler(selectedWorkout.id!)
+          const exercise = workout.exerciseEntryHandler(selectedExercise)
 
           return (
             <ExerciseModifierComponent

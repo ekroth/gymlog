@@ -33,7 +33,7 @@ export class WorkoutModifierScreen extends React.Component<
     return (
       <Subscribe to={[WorkoutEntriesStore]}>
         {(store: WorkoutEntriesStore) => {
-          const workout = store.workoutHandler(selectedWorkout.id!)
+          const workout = store.workoutEntryHandler(selectedWorkout.id!)
 
           return (
             <WorkoutModifierComponent
@@ -42,10 +42,10 @@ export class WorkoutModifierScreen extends React.Component<
                   onSelectExercise: async exercise => {
                     await workout.addExercise(exercise)
 
-                    const index = workout.getWorkout().exercises.length - 1
+                    const index = workout.getWorkoutEntry().exercises.length - 1
                     const paramsModifier: ExerciseModifierNavigationParams = {
                       selectedWorkout,
-                      exercise: workout.getExercise(index).exercise,
+                      exercise: workout.getExerciseEntry(index).exercise,
                       selectedExercise: index
                     }
 
@@ -57,18 +57,18 @@ export class WorkoutModifierScreen extends React.Component<
                 }
                 this.props.navigation.navigate('ExerciseSelectorScreen', params)
               }}
-              onModifyExercise={workout.modifyExercise}
-              onDeleteExercise={workout.deleteExercise}
+              onModifyExercise={workout.modifyExerciseEntry}
+              onDeleteExercise={workout.deleteExerciseEntry}
               onSelectExercise={index => {
                 const params: ExerciseModifierNavigationParams = {
                   selectedWorkout,
-                  exercise: workout.getExercise(index).exercise,
+                  exercise: workout.getExerciseEntry(index).exercise,
                   selectedExercise: index
                 }
 
                 this.props.navigation.navigate('ExerciseModifierScreen', params)
               }}
-              exercises={workout.getWorkout().exercises}
+              exercises={workout.getWorkoutEntry().exercises}
             />
           )
         }}

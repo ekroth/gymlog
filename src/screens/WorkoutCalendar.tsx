@@ -28,7 +28,7 @@ export class WorkoutCalendarScreen extends React.Component<
           <WorkoutCalendarComponent
             onAddWorkout={async () => {
               const timestamp = new Date().getTime()
-              await store.addWorkout({
+              await store.addWorkoutEntry({
                 timestamp,
                 exercises: []
               })
@@ -46,7 +46,7 @@ export class WorkoutCalendarScreen extends React.Component<
 
               this.props.navigation.navigate('DayModifierScreen', params)
             }}
-            days={store.getDays()}
+            days={store.getDayEntries()}
           />
         )}
       </Subscribe>
