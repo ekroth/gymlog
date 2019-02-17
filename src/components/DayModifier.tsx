@@ -52,7 +52,9 @@ const createExercisePreviewItem = (
 ) => (
   <Grid style={{ alignItems: 'center' }}>
     <Row>
-      <Text>{new Date(info.item.timestamp).toLocaleTimeString()}</Text>
+      <Text onPress={onPress}>
+        {new Date(info.item.timestamp).toLocaleTimeString()}
+      </Text>
     </Row>
     <Row>
       <WorkoutModifierComponent

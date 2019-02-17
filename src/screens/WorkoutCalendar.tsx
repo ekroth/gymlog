@@ -29,13 +29,7 @@ export class WorkoutCalendarScreen extends React.Component<
               const date = new Date()
               await store.addWorkout({
                 timestamp: date.getTime(),
-                exercises: [
-                  {
-                    name: 'Squat',
-                    sets: [],
-                    color: 'black'
-                  }
-                ]
+                exercises: []
               })
 
               const params: DayModifierNavigationParams = {
