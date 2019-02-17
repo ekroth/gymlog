@@ -17,7 +17,7 @@ export const ExercisePreviewComponent = (props: ExercisePreviewProps) => (
   <TouchableOpacity onPress={callback0(props.onPress)}>
     <Grid style={{ alignItems: 'center' }}>
       <Row size={10}>
-        <Text>{props.exercise.name}</Text>
+        <Text>{props.exercise.exercise.name}</Text>
       </Row>
       <Row size={90}>
         <FlatList<Set>

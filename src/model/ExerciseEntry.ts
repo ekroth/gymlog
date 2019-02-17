@@ -1,8 +1,9 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
+import { Exercise } from './Exercise'
 import { Set } from './Set'
 
 export interface ExerciseEntry {
-  readonly name: string
+  readonly exercise: Exercise
   readonly sets: ReadonlyArray<Set>
   readonly color: string
 }

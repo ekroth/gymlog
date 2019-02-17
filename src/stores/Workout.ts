@@ -1,3 +1,4 @@
+import { Exercise } from 'model/Exercise'
 import moment from 'moment'
 import { Container } from 'unstated'
 
@@ -72,8 +73,8 @@ export class WorkoutHandler {
     return this.store.state.workouts.filter(w => w.id === this.id)[0]
   }
 
-  public addExercise = (name: string) => {
-    this.store.modifyWorkout(addExercise(this.getWorkout(), name), this.id)
+  public addExercise = (exercise: Exercise) => {
+    this.store.modifyWorkout(addExercise(this.getWorkout(), exercise), this.id)
   }
 
   public deleteExercise = (index: number) => {

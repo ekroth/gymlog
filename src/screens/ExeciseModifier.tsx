@@ -6,15 +6,14 @@ import {
 import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
+import { Exercise } from '../model/Exercise'
 import { WorkoutEntry } from '../model/WorkoutEntry'
 import { WorkoutStore } from '../stores/Workout'
 
 export type ExerciseModifierNavigationParams = {
-  // Convenience copy for React Navigation Header
-  exerciseName: string
+  exercise: Exercise
   selectedExercise: number
   selectedWorkout: WorkoutEntry
-  exerciseColor: string
 }
 
 export class ExerciseModifierScreen extends React.Component<
@@ -23,8 +22,8 @@ export class ExerciseModifierScreen extends React.Component<
   public static navigationOptions = (
     props: NavigationScreenProps<ExerciseModifierNavigationParams>
   ): NavigationScreenOptions => ({
-    title: props.navigation.state.params!.exerciseName,
-    headerTintColor: props.navigation.state.params!.exerciseColor
+    title: props.navigation.state.params!.exercise.name,
+    headerTintColor: props.navigation.state.params!.exercise.color
   })
 
   public render() {

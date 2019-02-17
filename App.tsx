@@ -13,7 +13,11 @@ import { ExerciseCatalogStore } from './src/stores/ExerciseCatalog'
 import { WorkoutStore } from './src/stores/Workout'
 
 const testExerciseCatalogState = new ExerciseCatalogStore({
-  exercises: ['Squat', 'Deadlift', 'Curls']
+  exercises: [
+    { id: 0, name: 'Squat', color: 'green' },
+    { id: 1, name: 'Deadlift', color: 'blue' },
+    { id: 2, name: 'Curls', color: 'red' }
+  ]
 })
 
 const testState = new WorkoutStore({
@@ -23,7 +27,7 @@ const testState = new WorkoutStore({
       timestamp: new Date('2019-01-24T09:00:00').getTime(),
       exercises: [
         {
-          name: 'Squat',
+          exercise: testExerciseCatalogState.state.exercises[0],
           sets: [
             { weight: 120, reps: 50 },
             { weight: 150, reps: 1 },
@@ -32,7 +36,7 @@ const testState = new WorkoutStore({
           color: 'green'
         },
         {
-          name: 'Deadlift',
+          exercise: testExerciseCatalogState.state.exercises[1],
           sets: [{ weight: 200, reps: 1 }],
           color: 'blue'
         }
@@ -43,12 +47,12 @@ const testState = new WorkoutStore({
       timestamp: new Date('2019-01-24T18:00:00').getTime(),
       exercises: [
         {
-          name: 'Squat',
+          exercise: testExerciseCatalogState.state.exercises[0],
           sets: [{ weight: 200, reps: 50 }],
           color: 'green'
         },
         {
-          name: 'Deadlift',
+          exercise: testExerciseCatalogState.state.exercises[1],
           sets: [{ weight: 100, reps: 10 }],
           color: 'blue'
         }

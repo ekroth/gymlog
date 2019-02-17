@@ -6,11 +6,12 @@ import {
 import { Subscribe } from 'unstated'
 
 import { ExerciseSelectorComponent } from '../components/ExerciseSelector'
+import { Exercise } from '../model/Exercise'
 import { ExerciseCatalogStore } from '../stores/ExerciseCatalog'
 import { callback1 } from '../util/Callbacks'
 
 export type ExerciseSelectorNavigationParams = {
-  onSelectExercise?: (exercise: string) => void
+  onSelectExercise?: (exercise: Exercise) => void
 }
 
 export class ExerciseSelectorScreen extends React.Component<

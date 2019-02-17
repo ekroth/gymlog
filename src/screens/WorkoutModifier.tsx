@@ -45,9 +45,8 @@ export class WorkoutModifierScreen extends React.Component<
                     const index = workout.getWorkout().exercises.length - 1
                     const paramsModifier: ExerciseModifierNavigationParams = {
                       selectedWorkout,
-                      exerciseName: workout.getExercise(index).name,
-                      selectedExercise: index,
-                      exerciseColor: workout.getExercise(index).color
+                      exercise: workout.getExercise(index).exercise,
+                      selectedExercise: index
                     }
 
                     this.props.navigation.navigate(
@@ -63,9 +62,8 @@ export class WorkoutModifierScreen extends React.Component<
               onSelectExercise={index => {
                 const params: ExerciseModifierNavigationParams = {
                   selectedWorkout,
-                  exerciseName: workout.getExercise(index).name,
-                  selectedExercise: index,
-                  exerciseColor: workout.getExercise(index).color
+                  exercise: workout.getExercise(index).exercise,
+                  selectedExercise: index
                 }
 
                 this.props.navigation.navigate('ExerciseModifierScreen', params)

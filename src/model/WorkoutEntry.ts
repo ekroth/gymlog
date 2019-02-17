@@ -1,4 +1,5 @@
 import { arrayRemove, arrayUpdate } from '../util/ArrayUtils'
+import { Exercise } from './Exercise'
 import { ExerciseEntry } from './ExerciseEntry'
 
 export interface WorkoutEntry {
@@ -7,9 +8,9 @@ export interface WorkoutEntry {
   readonly exercises: ReadonlyArray<ExerciseEntry>
 }
 
-export const addExercise = (workout: WorkoutEntry, name: string) => ({
+export const addExercise = (workout: WorkoutEntry, exercise: Exercise) => ({
   ...workout,
-  exercises: [...workout.exercises, { name, sets: [], color: 'black' }]
+  exercises: [...workout.exercises, { exercise, sets: [], color: 'black' }]
 })
 
 export const modifyExercise = (
