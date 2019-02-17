@@ -106,11 +106,15 @@ export class WorkoutStore extends Container<WorkoutState> {
 
   public getDay = (date: Date): Day => ({
     date: new Date(dateDayString(date)),
-    workouts: this.state.workouts.filter(w => dateSameDay(w.date, date))
+    workouts: this.state.workouts.filter(w =>
+      dateSameDay(new Date(w.timestamp), date)
+    )
   })
 
   public getDays = (): ReadonlyArray<Day> => {
-    const dates = arrayUnique(this.state.workouts.map(w => w.date))
+    const dates = arrayUnique(
+      this.state.workouts.map(w => new Date(w.timestamp))
+    )
     return dates.map(this.getDay)
   }
 

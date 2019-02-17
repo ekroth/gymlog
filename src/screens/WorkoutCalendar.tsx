@@ -28,7 +28,7 @@ export class WorkoutCalendarScreen extends React.Component<
             onAddWorkout={async () => {
               const date = new Date()
               await store.addWorkout({
-                date,
+                timestamp: date.getTime(),
                 exercises: [
                   {
                     name: 'Squat',

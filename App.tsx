@@ -20,7 +20,7 @@ const testState = new WorkoutStore({
   workouts: [
     {
       id: 0,
-      date: new Date('2019-01-24T09:00:00'),
+      timestamp: new Date('2019-01-24T09:00:00').getTime(),
       exercises: [
         {
           name: 'Squat',
@@ -40,7 +40,7 @@ const testState = new WorkoutStore({
     },
     {
       id: 1,
-      date: new Date('2019-01-24T18:00:00'),
+      timestamp: new Date('2019-01-24T18:00:00').getTime(),
       exercises: [
         {
           name: 'Squat',

@@ -33,7 +33,7 @@ export class DayModifierScreen extends React.Component<
             day={store.getDay(date)}
             onSelectWorkout={workout => {
               const params: WorkoutModifierNavigationParams = {
-                date: workout.date,
+                date: new Date(workout.timestamp),
                 selectedWorkout: workout
               }
 
