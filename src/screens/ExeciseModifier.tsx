@@ -8,7 +8,7 @@ import { Subscribe } from 'unstated'
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
 import { Exercise } from '../model/Exercise'
 import { WorkoutEntry } from '../model/WorkoutEntry'
-import { WorkoutStore } from '../stores/Workout'
+import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
 
 export type ExerciseModifierNavigationParams = {
   exercise: Exercise
@@ -32,8 +32,8 @@ export class ExerciseModifierScreen extends React.Component<
     const selectedWorkout = this.props.navigation.state.params!.selectedWorkout
 
     return (
-      <Subscribe to={[WorkoutStore]}>
-        {(store: WorkoutStore) => {
+      <Subscribe to={[WorkoutEntriesStore]}>
+        {(store: WorkoutEntriesStore) => {
           const workout = store.workoutHandler(selectedWorkout.id!)
           const exercise = workout.exerciseHandler(selectedExercise)
 

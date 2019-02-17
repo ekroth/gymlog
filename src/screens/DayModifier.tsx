@@ -6,7 +6,7 @@ import {
 import { Subscribe } from 'unstated'
 
 import { DayModifierComponent } from '../components/DayModifier'
-import { WorkoutStore } from '../stores/Workout'
+import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
 import { WorkoutModifierNavigationParams } from './WorkoutModifier'
 
 export type DayModifierNavigationParams = {
@@ -26,8 +26,8 @@ export class DayModifierScreen extends React.Component<
     const date = this.props.navigation.state.params!.date
 
     return (
-      <Subscribe to={[WorkoutStore]}>
-        {(store: WorkoutStore) => (
+      <Subscribe to={[WorkoutEntriesStore]}>
+        {(store: WorkoutEntriesStore) => (
           <DayModifierComponent
             onAddWorkout={undefined} // TODO: must supply time?
             day={store.getDay(date)}

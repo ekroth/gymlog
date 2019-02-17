@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { Container, Header, Text } from 'native-base'
 import React, { PureComponent } from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
@@ -10,7 +9,7 @@ import { ExerciseSelectorScreen } from './src/screens/ExerciseSelector'
 import { WorkoutCalendarScreen } from './src/screens/WorkoutCalendar'
 import { WorkoutModifierScreen } from './src/screens/WorkoutModifier'
 import { ExerciseCatalogStore } from './src/stores/ExerciseCatalog'
-import { WorkoutStore } from './src/stores/Workout'
+import { WorkoutEntriesStore } from './src/stores/WorkoutEntries'
 
 const testExerciseCatalogState = new ExerciseCatalogStore({
   exercises: [
@@ -20,7 +19,7 @@ const testExerciseCatalogState = new ExerciseCatalogStore({
   ]
 })
 
-const testState = new WorkoutStore({
+const testState = new WorkoutEntriesStore({
   workouts: [
     {
       id: 0,

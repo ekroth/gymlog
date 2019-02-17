@@ -8,7 +8,7 @@ import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
 import { WorkoutEntry } from '../model/WorkoutEntry'
-import { WorkoutStore } from '../stores/Workout'
+import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 
@@ -31,8 +31,8 @@ export class WorkoutModifierScreen extends React.Component<
     const selectedWorkout = this.props.navigation.state.params!.selectedWorkout
 
     return (
-      <Subscribe to={[WorkoutStore]}>
-        {(store: WorkoutStore) => {
+      <Subscribe to={[WorkoutEntriesStore]}>
+        {(store: WorkoutEntriesStore) => {
           const workout = store.workoutHandler(selectedWorkout.id!)
 
           return (

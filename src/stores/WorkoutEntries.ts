@@ -18,20 +18,20 @@ import {
 } from '../model/WorkoutEntry'
 import { arrayUnique, arrayUpdateWhere } from '../util/ArrayUtils'
 
-export type WorkoutState = {
+export type WorkoutEntriesState = {
   nextId: number
   workouts: ReadonlyArray<WorkoutEntry>
 }
 
-export type WorkoutProps = {
+export type WorkoutEntriesProps = {
   workouts: ReadonlyArray<WorkoutEntry>
 }
 
-export class ExerciseHandler {
-  private store: WorkoutHandler
+export class ExerciseEntryHandler {
+  private store: WorkoutEntryHandler
   private index: number
 
-  constructor(store: WorkoutHandler, index: number) {
+  constructor(store: WorkoutEntryHandler, index: number) {
     this.store = store
     this.index = index
   }
@@ -56,17 +56,17 @@ export class ExerciseHandler {
   }
 }
 
-export class WorkoutHandler {
-  private store: WorkoutStore
+export class WorkoutEntryHandler {
+  private store: WorkoutEntriesStore
   private id: number
 
-  constructor(store: WorkoutStore, id: number) {
+  constructor(store: WorkoutEntriesStore, id: number) {
     this.store = store
     this.id = id
   }
 
   public exerciseHandler = (index: number) => {
-    return new ExerciseHandler(this, index)
+    return new ExerciseEntryHandler(this, index)
   }
 
   public getWorkout = () => {
@@ -93,9 +93,9 @@ export class WorkoutHandler {
   }
 }
 
-export class WorkoutStore extends Container<WorkoutState> {
+export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
   constructor(
-    props: WorkoutProps = {
+    props: WorkoutEntriesProps = {
       workouts: []
     }
   ) {
@@ -107,7 +107,7 @@ export class WorkoutStore extends Container<WorkoutState> {
   }
 
   public workoutHandler = (id: number) => {
-    return new WorkoutHandler(this, id)
+    return new WorkoutEntryHandler(this, id)
   }
 
   public getDay = (date: string): DayEntry => ({
