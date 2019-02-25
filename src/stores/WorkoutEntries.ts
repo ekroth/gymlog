@@ -1,5 +1,6 @@
 import { Exercise } from 'model/Exercise'
 import moment from 'moment'
+import UUIDGenerator from 'react-native-uuid-generator'
 import { Container } from 'unstated'
 
 import { DayEntry } from '../model/DayEntry'
@@ -16,10 +17,13 @@ import {
   modifyExercise,
   WorkoutEntry
 } from '../model/WorkoutEntry'
+import { ExerciseSchema } from '../realm/Exercise'
+import { ExerciseEntrySchema } from '../realm/ExerciseEntry'
+import { SetSchema } from '../realm/Set'
+import { WorkoutEntrySchema } from '../realm/WorkoutEntry'
 import { arrayUnique, arrayUpdateWhere } from '../util/ArrayUtils'
 
 export type WorkoutEntriesState = {
-  nextId: number
   workouts: ReadonlyArray<WorkoutEntry>
 }
 
@@ -61,9 +65,9 @@ export class ExerciseEntryHandler {
 
 export class WorkoutEntryHandler {
   private store: WorkoutEntriesStore
-  private id: number
+  private id: string
 
-  constructor(store: WorkoutEntriesStore, id: number) {
+  constructor(store: WorkoutEntriesStore, id: string) {
     this.store = store
     this.id = id
   }
@@ -77,23 +81,16 @@ export class WorkoutEntryHandler {
   }
 
   public addExercise = (exercise: Exercise) => {
-    this.store.modifyWorkoutEntry(
-      addExercise(this.getWorkoutEntry(), exercise),
-      this.id
-    )
+    this.store.modifyWorkoutEntry(addExercise(this.getWorkoutEntry(), exercise))
   }
 
   public deleteExerciseEntry = (index: number) => {
-    this.store.modifyWorkoutEntry(
-      deleteExercise(this.getWorkoutEntry(), index),
-      this.id
-    )
+    this.store.modifyWorkoutEntry(deleteExercise(this.getWorkoutEntry(), index))
   }
 
   public modifyExerciseEntry = (index: number, exercise: ExerciseEntry) => {
     this.store.modifyWorkoutEntry(
-      modifyExercise(this.getWorkoutEntry(), index, exercise),
-      this.id
+      modifyExercise(this.getWorkoutEntry(), index, exercise)
     )
   }
 
@@ -103,19 +100,31 @@ export class WorkoutEntryHandler {
 }
 
 export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
+  private realm: Realm
+
   constructor(
     props: WorkoutEntriesProps = {
       workouts: []
     }
   ) {
     super()
+    this.realm = new Realm({
+      schema: [
+        WorkoutEntrySchema,
+        ExerciseEntrySchema,
+        ExerciseSchema,
+        SetSchema
+      ],
+      inMemory: false,
+      deleteRealmIfMigrationNeeded: true
+    })
     this.state = {
-      nextId: props.workouts.length,
-      workouts: props.workouts
+      workouts: Array.from(this.realm.objects<WorkoutEntry>(WorkoutEntrySchema))
     }
+    props.workouts.forEach(this.addWorkoutEntry)
   }
 
-  public workoutEntryHandler = (id: number) => {
+  public workoutEntryHandler = (id: string) => {
     return new WorkoutEntryHandler(this, id)
   }
 
@@ -133,16 +142,36 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
     return dates.map(this.getDayEntry)
   }
 
-  public addWorkoutEntry = (workout: WorkoutEntry) =>
-    this.setState(state => ({
-      ...state,
-      nextId: state.nextId + 1,
-      workouts: [...state.workouts, { ...workout, id: state.nextId }]
-    }))
+  public addWorkoutEntry = async (workout: WorkoutEntry) => {
+    const id = await UUIDGenerator.getRandomUUID()
+    const workoutWithId = {
+      id,
+      ...workout
+    }
 
-  public modifyWorkoutEntry = (workout: WorkoutEntry, id: number) =>
-    this.setState(state => ({
-      ...state,
-      workouts: arrayUpdateWhere(state.workouts, workout, w => w.id === id)
-    }))
+    this.setState(state => {
+      this.realm.write(() => {
+        this.realm.create<WorkoutEntry>(WorkoutEntrySchema, workoutWithId, true)
+      })
+      return {
+        ...state,
+        workouts: [...state.workouts, workoutWithId]
+      }
+    })
+  }
+
+  public modifyWorkoutEntry = (workout: WorkoutEntry) =>
+    this.setState(state => {
+      this.realm.write(() => {
+        this.realm.create(WorkoutEntrySchema, workout, true)
+      })
+      return {
+        ...state,
+        workouts: arrayUpdateWhere(
+          state.workouts,
+          workout,
+          w => w.id === workout.id
+        )
+      }
+    })
 }

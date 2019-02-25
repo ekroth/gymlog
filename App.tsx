@@ -1,13 +1,8 @@
 import { Container, Header, Text } from 'native-base'
 import React, { PureComponent } from 'react'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
-import Realm from 'realm'
 import { Provider } from 'unstated'
 
-import { ExerciseSchema } from './src/realm/Exercise'
-import { ExerciseEntrySchema } from './src/realm/ExerciseEntry'
-import { SetSchema } from './src/realm/Set'
-import { WorkoutEntrySchema } from './src/realm/WorkoutEntry'
 import { DayModifierScreen } from './src/screens/DayModifier'
 import { ExerciseModifierScreen } from './src/screens/ExeciseModifier'
 import { ExerciseSelectorScreen } from './src/screens/ExerciseSelector'
@@ -18,15 +13,15 @@ import { WorkoutEntriesStore } from './src/stores/WorkoutEntries'
 
 const testExerciseCatalogState = new ExerciseCatalogStore({
   exercises: [
-    { id: 0, name: 'Squat', color: 'green' },
-    { id: 1, name: 'Deadlift', color: 'blue' },
-    { id: 2, name: 'Curls', color: 'red' }
+    { id: '0', name: 'Squat', color: 'green' },
+    { id: '1', name: 'Deadlift', color: 'blue' },
+    { id: '2', name: 'Curls', color: 'red' }
   ]
 })
 
 const testState = new WorkoutEntriesStore({
   workouts: [
-    {
+    /* {
       id: 0,
       timestamp: new Date('2019-01-24T09:00:00').getTime(),
       exercises: [
@@ -61,7 +56,7 @@ const testState = new WorkoutEntriesStore({
           color: 'blue'
         }
       ]
-    }
+    }*/
   ]
 })
 
@@ -90,17 +85,6 @@ const WorkoutNavigator = createAppContainer(
     }
   )
 )
-
-const realm = new Realm({
-  schema: [WorkoutEntrySchema, ExerciseEntrySchema, ExerciseSchema, SetSchema],
-  inMemory: true,
-  deleteRealmIfMigrationNeeded: true
-})
-
-realm.write(() => realm.create(WorkoutEntrySchema, testState.state.workouts[0]))
-realm.write(() => realm.create(WorkoutEntrySchema, testState.state.workouts[1]))
-
-throw new Error(JSON.stringify(realm.objects(WorkoutEntrySchema)))
 
 /* tslint:disable:no-default-export */
 export default class App extends PureComponent {

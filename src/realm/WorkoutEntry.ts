@@ -5,7 +5,7 @@ export class WorkoutEntrySchema {
     name: 'WorkoutEntrySchema',
     primaryKey: 'id',
     properties: {
-      id: { type: 'int', indexed: true },
+      id: { type: 'string', indexed: true },
       timestamp: { type: 'int' },
       exercises: { type: 'ExerciseEntrySchema[]' }
     }

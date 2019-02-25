@@ -5,7 +5,7 @@ export class ExerciseSchema {
     name: 'ExerciseSchema',
     primaryKey: 'id',
     properties: {
-      id: { type: 'int', indexed: true },
+      id: { type: 'string', indexed: true },
       name: { type: 'string' },
       color: { type: 'string' }
     }

@@ -3,7 +3,7 @@ import { Exercise } from './Exercise'
 import { ExerciseEntry } from './ExerciseEntry'
 
 export interface WorkoutEntry {
-  readonly id?: number
+  readonly id?: string
   readonly timestamp: number
   readonly exercises: ReadonlyArray<ExerciseEntry>
 }

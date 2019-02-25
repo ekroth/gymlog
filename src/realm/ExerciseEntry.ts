@@ -4,7 +4,9 @@ export class ExerciseEntrySchema {
   public static schema: ObjectSchema = {
     name: 'ExerciseEntrySchema',
     properties: {
-      sets: { type: 'SetSchema[]' }
+      exercise: { type: 'ExerciseSchema' },
+      sets: { type: 'SetSchema[]' },
+      color: { type: 'string' }
     }
   }
 }
