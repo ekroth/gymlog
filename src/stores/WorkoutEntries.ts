@@ -77,7 +77,7 @@ export class WorkoutEntryHandler {
   }
 
   public getWorkoutEntry = () => {
-    return this.store.state.workouts.filter(w => w.id === this.id)[0]
+    return this.store.getWorkoutEntry(this.id)
   }
 
   public addExercise = (exercise: Exercise) => {
@@ -119,9 +119,17 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
       deleteRealmIfMigrationNeeded: true
     })
     this.state = {
-      workouts: Array.from(this.realm.objects<WorkoutEntry>(WorkoutEntrySchema))
+      workouts: Array.from(
+        this.realm.objects<WorkoutEntrySchema>(WorkoutEntrySchema)
+      ).map(v => v.cloneRealm())
     }
     props.workouts.forEach(this.addWorkoutEntry)
+  }
+
+  public getWorkoutEntry = (id: string): WorkoutEntry => {
+    return this.realm
+      .objectForPrimaryKey<WorkoutEntrySchema>(WorkoutEntrySchema, id)!
+      .cloneRealm()
   }
 
   public workoutEntryHandler = (id: string) => {
@@ -145,7 +153,7 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
   public addWorkoutEntry = async (workout: WorkoutEntry) => {
     const id = await UUIDGenerator.getRandomUUID()
     const workoutWithId = {
-      id,
+      id: workout.id || id,
       ...workout
     }
 

@@ -8,10 +8,12 @@ export interface WorkoutEntry {
   readonly exercises: ReadonlyArray<ExerciseEntry>
 }
 
-export const addExercise = (workout: WorkoutEntry, exercise: Exercise) => ({
-  ...workout,
-  exercises: [...workout.exercises, { exercise, sets: [], color: 'black' }]
-})
+export const addExercise = (workout: WorkoutEntry, exercise: Exercise) => {
+  return {
+    ...workout,
+    exercises: [...workout.exercises, { exercise, sets: [], color: 'black' }]
+  }
+}
 
 export const modifyExercise = (
   workout: WorkoutEntry,
