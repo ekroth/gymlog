@@ -7,13 +7,12 @@ import { Subscribe } from 'unstated'
 
 import { ExerciseModifierComponent } from '../components/ExerciseModifier'
 import { Exercise } from '../model/Exercise'
-import { WorkoutEntry } from '../model/WorkoutEntry'
 import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
 
 export type ExerciseModifierNavigationParams = {
   exercise: Exercise
   selectedExercise: number
-  selectedWorkout: WorkoutEntry
+  selectedWorkoutId: string
 }
 
 export class ExerciseModifierScreen extends React.Component<
@@ -29,12 +28,13 @@ export class ExerciseModifierScreen extends React.Component<
   public render() {
     const selectedExercise = this.props.navigation.state.params!
       .selectedExercise
-    const selectedWorkout = this.props.navigation.state.params!.selectedWorkout
+    const selectedWorkoutId = this.props.navigation.state.params!
+      .selectedWorkoutId
 
     return (
       <Subscribe to={[WorkoutEntriesStore]}>
         {(store: WorkoutEntriesStore) => {
-          const workout = store.workoutEntryHandler(selectedWorkout.id!)
+          const workout = store.workoutEntryHandler(selectedWorkoutId)
           const exercise = workout.exerciseEntryHandler(selectedExercise)
 
           return (

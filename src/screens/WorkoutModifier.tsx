@@ -7,13 +7,14 @@ import {
 import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
-import { WorkoutEntry } from '../model/WorkoutEntry'
 import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
 import { ExerciseModifierNavigationParams } from './ExeciseModifier'
 import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
 
 export type WorkoutModifierNavigationParams = {
-  selectedWorkout: WorkoutEntry
+  selectedWorkoutId: string
+  // Convenience copy for Navigation title
+  selectedWorkoutTimestamp: number
 }
 
 export class WorkoutModifierScreen extends React.Component<
@@ -23,17 +24,20 @@ export class WorkoutModifierScreen extends React.Component<
     props: NavigationScreenProps<WorkoutModifierNavigationParams>
   ): NavigationScreenOptions => ({
     title: moment(
-      props.navigation.state.params!.selectedWorkout.timestamp
+      moment(
+        props.navigation.state.params!.selectedWorkoutTimestamp
+      ).toISOString()
     ).format('hh:mm:ss')
   })
 
   public render() {
-    const selectedWorkout = this.props.navigation.state.params!.selectedWorkout
+    const selectedWorkoutId = this.props.navigation.state.params!
+      .selectedWorkoutId
 
     return (
       <Subscribe to={[WorkoutEntriesStore]}>
         {(store: WorkoutEntriesStore) => {
-          const workout = store.workoutEntryHandler(selectedWorkout.id!)
+          const workout = store.workoutEntryHandler(selectedWorkoutId)
 
           return (
             <WorkoutModifierComponent
@@ -44,7 +48,7 @@ export class WorkoutModifierScreen extends React.Component<
 
                     const index = workout.getWorkoutEntry().exercises.length - 1
                     const paramsModifier: ExerciseModifierNavigationParams = {
-                      selectedWorkout,
+                      selectedWorkoutId,
                       exercise: workout.getExerciseEntry(index).exercise,
                       selectedExercise: index
                     }
@@ -61,7 +65,7 @@ export class WorkoutModifierScreen extends React.Component<
               onDeleteExercise={workout.deleteExerciseEntry}
               onSelectExercise={index => {
                 const params: ExerciseModifierNavigationParams = {
-                  selectedWorkout,
+                  selectedWorkoutId,
                   exercise: workout.getExerciseEntry(index).exercise,
                   selectedExercise: index
                 }

@@ -38,10 +38,9 @@ export class DayModifierScreen extends React.Component<
               }
 
               const workoutId = await store.addWorkoutEntry(insertedWorkout)
-              const workout = store.getWorkoutEntry(workoutId)
-
               const params: WorkoutModifierNavigationParams = {
-                selectedWorkout: workout
+                selectedWorkoutId: workoutId,
+                selectedWorkoutTimestamp: insertedWorkout.timestamp
               }
 
               return this.props.navigation.navigate(
@@ -52,7 +51,8 @@ export class DayModifierScreen extends React.Component<
             day={store.getDayEntry(date)}
             onSelectWorkout={workout => {
               const params: WorkoutModifierNavigationParams = {
-                selectedWorkout: workout
+                selectedWorkoutId: workout.id!,
+                selectedWorkoutTimestamp: workout.timestamp
               }
 
               return this.props.navigation.navigate(
