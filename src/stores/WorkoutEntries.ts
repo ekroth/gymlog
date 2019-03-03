@@ -157,7 +157,7 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
       ...workout
     }
 
-    this.setState(state => {
+    await this.setState(state => {
       this.realm.write(() => {
         this.realm.create<WorkoutEntry>(WorkoutEntrySchema, workoutWithId, true)
       })
@@ -166,6 +166,8 @@ export class WorkoutEntriesStore extends Container<WorkoutEntriesState> {
         workouts: [...state.workouts, workoutWithId]
       }
     })
+
+    return id
   }
 
   public modifyWorkoutEntry = (workout: WorkoutEntry) =>

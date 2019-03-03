@@ -1,3 +1,5 @@
+import { WorkoutEntry } from 'model/WorkoutEntry'
+import moment from 'moment'
 import React from 'react'
 import {
   NavigationScreenOptions,
@@ -29,7 +31,24 @@ export class DayModifierScreen extends React.Component<
       <Subscribe to={[WorkoutEntriesStore]}>
         {(store: WorkoutEntriesStore) => (
           <DayModifierComponent
-            onAddWorkout={undefined} // TODO: must supply time?
+            onAddWorkout={async () => {
+              const insertedWorkout: WorkoutEntry = {
+                timestamp: moment(date).valueOf(),
+                exercises: []
+              }
+
+              const workoutId = await store.addWorkoutEntry(insertedWorkout)
+              const workout = store.getWorkoutEntry(workoutId)
+
+              const params: WorkoutModifierNavigationParams = {
+                selectedWorkout: workout
+              }
+
+              return this.props.navigation.navigate(
+                'WorkoutModifierScreen',
+                params
+              )
+            }}
             day={store.getDayEntry(date)}
             onSelectWorkout={workout => {
               const params: WorkoutModifierNavigationParams = {
