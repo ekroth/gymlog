@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { Col, Grid, Row, Text, View } from 'native-base'
+import { Col, Grid, Row, Text } from 'native-base'
 import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
@@ -30,7 +30,6 @@ export const DayModifierComponent = (props: DayModifierProps) => {
           null}
         <Row>
           <FlatList<WorkoutEntry>
-            ItemSeparatorComponent={itemSeparator}
             data={props.day.workouts}
             keyExtractor={keyExtractorIndex}
             renderItem={info =>
@@ -45,15 +44,21 @@ export const DayModifierComponent = (props: DayModifierProps) => {
   )
 }
 
-const itemSeparator = () => <View style={{ height: 40 }} />
-
 const createExercisePreviewItem = (
   info: ListRenderItemInfo<WorkoutEntry>,
   onPress: () => void
 ) => (
   <Grid style={{ alignItems: 'center' }}>
     <Row>
-      <Text onPress={onPress}>
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: 'bold',
+          textAlign: 'center',
+          padding: 10
+        }}
+        onPress={onPress}
+      >
         {moment(info.item.timestamp).format('hh:mm:ss')}
       </Text>
     </Row>
