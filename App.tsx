@@ -80,7 +80,7 @@ const WorkoutNavigator = createAppContainer(
       }
     },
     {
-      initialRouteName: 'WorkoutCalendarScreen',
+      initialRouteName: WorkoutCalendarScreen.name,
       initialRouteParams: {}
     }
   )

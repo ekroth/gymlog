@@ -8,8 +8,14 @@ import { Subscribe } from 'unstated'
 
 import { WorkoutModifierComponent } from '../components/WorkoutModifier'
 import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
-import { ExerciseModifierNavigationParams } from './ExeciseModifier'
-import { ExerciseSelectorNavigationParams } from './ExerciseSelector'
+import {
+  ExerciseModifierNavigationParams,
+  ExerciseModifierScreen
+} from './ExeciseModifier'
+import {
+  ExerciseSelectorNavigationParams,
+  ExerciseSelectorScreen
+} from './ExerciseSelector'
 
 export type WorkoutModifierNavigationParams = {
   selectedWorkoutId: string
@@ -54,12 +60,15 @@ export class WorkoutModifierScreen extends React.Component<
                     }
 
                     this.props.navigation.navigate(
-                      'ExerciseModifierScreen',
+                      ExerciseModifierScreen.name,
                       paramsModifier
                     )
                   }
                 }
-                this.props.navigation.navigate('ExerciseSelectorScreen', params)
+                this.props.navigation.navigate(
+                  ExerciseSelectorScreen.name,
+                  params
+                )
               }}
               onModifyExercise={workout.modifyExerciseEntry}
               onDeleteExercise={workout.deleteExerciseEntry}
@@ -70,7 +79,10 @@ export class WorkoutModifierScreen extends React.Component<
                   selectedExercise: index
                 }
 
-                this.props.navigation.navigate('ExerciseModifierScreen', params)
+                this.props.navigation.navigate(
+                  ExerciseModifierScreen.name,
+                  params
+                )
               }}
               exercises={workout.getWorkoutEntry().exercises}
             />

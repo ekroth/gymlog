@@ -9,7 +9,10 @@ import { Subscribe } from 'unstated'
 
 import { DayModifierComponent } from '../components/DayModifier'
 import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
-import { WorkoutModifierNavigationParams } from './WorkoutModifier'
+import {
+  WorkoutModifierNavigationParams,
+  WorkoutModifierScreen
+} from './WorkoutModifier'
 
 export type DayModifierNavigationParams = {
   date: string
@@ -44,7 +47,7 @@ export class DayModifierScreen extends React.Component<
               }
 
               return this.props.navigation.navigate(
-                'WorkoutModifierScreen',
+                WorkoutModifierScreen.name,
                 params
               )
             }}
@@ -56,7 +59,7 @@ export class DayModifierScreen extends React.Component<
               }
 
               return this.props.navigation.navigate(
-                'WorkoutModifierScreen',
+                WorkoutModifierScreen.name,
                 params
               )
             }}

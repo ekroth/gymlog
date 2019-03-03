@@ -8,7 +8,7 @@ import { Subscribe } from 'unstated'
 
 import { WorkoutCalendarComponent } from '../components/WorkoutCalendar'
 import { WorkoutEntriesStore } from '../stores/WorkoutEntries'
-import { DayModifierNavigationParams } from './DayModifier'
+import { DayModifierNavigationParams, DayModifierScreen } from './DayModifier'
 
 export type WorkoutCalendarNavigationParams = {}
 
@@ -37,14 +37,14 @@ export class WorkoutCalendarScreen extends React.Component<
                 date: moment(timestamp).format('YYYY-MM-DD')
               }
 
-              this.props.navigation.navigate('DayModifierScreen', params)
+              this.props.navigation.navigate(DayModifierScreen.name, params)
             }}
             onSelectDay={date => {
               const params: DayModifierNavigationParams = {
                 date: date.dateString
               }
 
-              this.props.navigation.navigate('DayModifierScreen', params)
+              this.props.navigation.navigate(DayModifierScreen.name, params)
             }}
             days={store.getDayEntries()}
           />
