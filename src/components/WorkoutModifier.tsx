@@ -1,4 +1,4 @@
-import { Grid, Row, View } from 'native-base'
+import { Col, Grid, Row, View } from 'native-base'
 import React from 'react'
 import { Button, FlatList, ListRenderItemInfo } from 'react-native'
 
@@ -12,20 +12,15 @@ export type WorkoutModifierProps = {
   onModifyExercise?: (index: number, exercise: ExerciseEntry) => void
   onDeleteExercise?: (index: number) => void
   onSelectExercise?: (index: number) => void
+  onAddWorkout?: () => void
   exercises: ReadonlyArray<ExerciseEntry>
 }
 
 export const WorkoutModifierComponent = (props: WorkoutModifierProps) => {
   return (
     <Grid>
-      {(props.onAddExercise && (
-        <Row size={0.1} style={{ alignItems: 'center' }}>
-          <Button
-            title={'Add Exercise'}
-            onPress={() => props.onAddExercise!()}
-          />
-        </Row>
-      )) ||
+      {((props.onAddExercise || props.onAddWorkout) &&
+        newWorkoutOrExercise(props)) ||
         null}
       <Row
         style={{
@@ -46,6 +41,23 @@ export const WorkoutModifierComponent = (props: WorkoutModifierProps) => {
     </Grid>
   )
 }
+
+const newWorkoutOrExercise = (props: WorkoutModifierProps) => (
+  <Row size={0.1}>
+    {(props.onAddExercise && (
+      <Col style={{ alignItems: 'center' }}>
+        <Button title={'Add Exercise'} onPress={() => props.onAddExercise!()} />
+      </Col>
+    )) ||
+      null}
+    {(props.onAddWorkout && (
+      <Col style={{ alignItems: 'center' }}>
+        <Button title={'New Workout'} onPress={() => props.onAddWorkout!()} />
+      </Col>
+    )) ||
+      null}
+  </Row>
+)
 
 const itemSeparator = () => <View style={{ height: 10 }} />
 
